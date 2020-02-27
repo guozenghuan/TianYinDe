@@ -1,0 +1,91 @@
+$(function () {
+    $("#jqGrid").jqGrid({
+        url: '../${pathName}/list',
+        datatype: "json",
+        colModel: [			
+#foreach($column in $columns)
+#if($column.attrname != 'createtime' && $column.attrname != 'updatetime')
+#if($column.attrname != 'id')
+			{ label: '${column.comments}', name: '${column.attrname}', width: 50},
+#end
+#else
+			{ label: '${column.comments}', name: '${column.attrname}', width: 50 ,formatter: function(value, options, row){
+				return dateForStr(value);
+			}},
+#end			
+#end
+			{ label: '操作',  name: 'id',width: 80, formatter: function(value, options, row){
+				return '<a class="btn btn-primary" style="padding: 6px 6px;margin-left: 6px;margin-top: 3px;" href="${pathName}_add.html?id='+row.id+'">编辑信息</a>'+
+					   '<a class="btn btn-default" style="padding: 6px 6px;margin-left: 6px;margin-top: 3px;" onclick="delThisById(\''+row.id+'\');">删除</a>';
+			}}
+        ],
+		viewrecords: true,
+        height: getWindowsInnerHeight(),
+        rowNum: 15,
+		rowList : [15,30,50],
+        rownumbers: true, 
+        rownumWidth: 25, 
+        autowidth:true,
+        //multiselect: true,
+        pager: "#jqGridPager",
+        jsonReader : {
+            root: "page.list",
+            page: "page.currPage",
+            total: "page.totalPage",
+            records: "page.totalCount"
+        },
+        prmNames : {
+            page:"page", 
+            rows:"limit", 
+            order: "order"
+        },
+        gridComplete:function(){
+        	//隐藏grid底部滚动条
+        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
+        }
+    });
+});
+
+var vm = new Vue({
+	el:'#rrapp',
+	data:{
+		
+	},
+	methods: {
+		update: function (event) {
+			var $pk.attrname = getSelectedRow();
+			if($pk.attrname == null){
+				return ;
+			}
+			
+			location.href = "${pathName}_add.html?$pk.attrname="+$pk.attrname;
+		}
+	}
+});
+
+//删除
+function delThisById(id){
+	if(id == null || id == undefined || id == "" || id == "null"){
+		alert("要删除的信息出现异常，请刷新当前页面后重新操作!");
+		return ;
+	}
+	
+	var ids = new Array();
+	ids.push(id);
+	confirm('确定要删除选中的记录？', function(){
+		$.ajax({
+			type: "POST",
+		    url: "../${pathName}/delete",
+		    data: JSON.stringify(ids),
+		    success: function(r){
+				if(r.code == 0){
+					alert('操作成功', function(index){
+						$("#jqGrid").trigger("reloadGrid");
+					});
+				}else{
+					alert(r.msg);
+				}
+			}
+		});
+	});
+}
