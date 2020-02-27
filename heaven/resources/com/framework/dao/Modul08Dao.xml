@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.Modul08Dao">
+
+	<select id="queryObject" resultType="com.framework.entity.Modul08Entity">
+		select * from modul_08 where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.Modul08Entity">
+		select * from modul_08
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="modulPath != null">
+			and modul_path = #{modulPath}
+		</if>
+		<if test="modulType != null">
+			and modul_type = #{modulType}
+		</if>
+		<if test="image01 != null">
+			and image_01 = #{image01}
+		</if>
+		<if test="image02 != null">
+			and image_02 = #{image02}
+		</if>
+		<if test="image03 != null">
+			and image_03 = #{image03}
+		</if>
+		<if test="text01 != null">
+			and text_01 = #{text01}
+		</if>
+		<if test="text02 != null">
+			and text_02 = #{text02}
+		</if>
+		<if test="text03 != null">
+			and text_03 = #{text03}
+		</if>
+		<if test="text04 != null">
+			and text_04 = #{text04}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.Modul08Entity">
+		select * from modul_08 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from modul_08 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.Modul08Entity" useGeneratedKeys="true" keyProperty="id">
+		insert into modul_08
+		(
+			`modul_path`, 
+			`modul_type`, 
+			`image_01`, 
+			`image_02`, 
+			`image_03`, 
+			`text_01`, 
+			`text_02`, 
+			`text_03`, 
+			`text_04`
+		)
+		values
+		(
+			#{modulPath}, 
+			#{modulType}, 
+			#{image01}, 
+			#{image02}, 
+			#{image03}, 
+			#{text01}, 
+			#{text02}, 
+			#{text03}, 
+			#{text04}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.Modul08Entity">
+		update modul_08 
+		<set>
+			<if test="modulPath != null">`modul_path` = #{modulPath}, </if>
+			<if test="modulType != null">`modul_type` = #{modulType}, </if>
+			<if test="image01 != null">`image_01` = #{image01}, </if>
+			<if test="image02 != null">`image_02` = #{image02}, </if>
+			<if test="image03 != null">`image_03` = #{image03}, </if>
+			<if test="text01 != null">`text_01` = #{text01}, </if>
+			<if test="text02 != null">`text_02` = #{text02}, </if>
+			<if test="text03 != null">`text_03` = #{text03}, </if>
+			<if test="text04 != null">`text_04` = #{text04}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from modul_08 where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from modul_08 where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

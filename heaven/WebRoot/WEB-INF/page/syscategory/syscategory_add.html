@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>类目表</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">类目名称</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="sysCategory.name" placeholder="类目名称"/>
+		    </div>
+		</div>
+ 
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">类目广告语介绍</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="sysCategory.desc" placeholder="类目广告语介绍"/>
+		    </div>
+		</div>
+ 
+		<!-- <div class="form-group">
+		   	<div class="col-sm-2 control-label">类目图标</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="sysCategory.iconUrl" placeholder="类目图标"/>
+		    </div>
+		</div> -->
+ 		<div class="form-group">
+		   	<div class="col-sm-2 control-label">类目图标</div>
+		   	<div class="col-sm-10">
+		      <a class="btn btn-primary" style="padding: 6px 6px;margin-left: 6px;margin-top: 3px;">
+		      	<input type="file" accept="image/jpg,image/jpeg,image/x-png" @change="uploadMainImage">
+		      </a>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label"></div>
+		   	<div class="col-sm-10">
+		      <img alt="" :src="mainImage" style="width: 194px;height: 120px;">
+		    </div>
+		</div>
+ 
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">排序</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="sysCategory.sortOrder" placeholder="排序"/>
+		    </div>
+		</div>
+ 
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/syscategory/syscategory_add.js?_${date.systemTime}"></script>
+</body>
+</html>

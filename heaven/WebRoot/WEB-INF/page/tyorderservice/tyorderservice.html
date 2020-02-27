@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>服务订单</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<!-- <a href="tyorderservice_add.html" class="btn btn-success">新增信息</a> -->
+		
+		<label style="float: left;line-height: 32px;">关键字:</label>
+		<input type="text" class="form-control" style="width: 20%;float: left;margin-right: 10px;" v-model="keyword" @keyup.enter="query" placeholder="订单号或用户ID或业务员ID(可按回车键查询)">
+		
+		<label style="float: left;line-height: 32px;">派单状态:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 10%;margin-right: 10px;" data-live-search="true" v-model="tsUserStatus">
+			   <option value="-1" selected="selected">全部</option>
+	           <option value="0">未派单</option>
+	           <option value="1">已派单</option> 
+		</select>
+		
+		<label style="float: left;line-height: 32px;">套餐支付状态:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 10%;margin-right: 10px;" data-live-search="true" v-model="priceStatus">
+			   <option value="-1" selected="selected">全部</option>
+	           <option value="0">未付款</option>
+	           <option value="1">已线上付款</option>
+	           <option value="2">线下打款</option> 
+		</select>
+		
+		<label style="float: left;line-height: 32px;">订单状态:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 10%;margin-right: 10px;" data-live-search="true" v-model="status">
+			   <option value="-1" selected="selected">全部</option>
+	           <option value="fuwuzhong">服务中</option>
+	           <option value="ywok">业务员已确认</option>
+	           <option value="ok">已完成</option>
+	           <option value="error">交易失败</option>
+		</select>
+		
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+		
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+    
+    <!-- 派单业务员 -->
+    <div id="topUpTree_paiDan" style="display: none;padding:10px;">
+		<iframe id="paiDanIframeID" scrolling="yes" frameborder="0" src="" style="width: 100%; height: 800px;"></iframe>
+	</div>
+    
+</div>
+
+<script src="${rc.contextPath}/js/tyorderservice/tyorderservice.js?_${date.systemTime}"></script>
+</body>
+</html>

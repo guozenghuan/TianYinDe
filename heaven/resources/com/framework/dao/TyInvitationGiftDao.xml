@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TyInvitationGiftDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TyInvitationGiftEntity">
+		select * from ty_invitation_gift where id = #{value}
+	</select>
+	
+	<select id="queryByCode" resultType="com.framework.entity.TyInvitationGiftEntity">
+		select * from ty_invitation_gift where modul_id=#{modulId} 
+		and DATE_FORMAT(createtime,'%Y-%m-%d %H:%i:%S') between #{stime} and #{etime}
+		order by createtime DESC
+	</select>
+	
+	<select id="queryListRand" resultType="com.framework.entity.TyInvitationGiftEntity">
+		select * from ty_invitation_gift  
+		where modul_id=#{value} 
+		and status = 0
+		ORDER BY RAND() LIMIT 25
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TyInvitationGiftEntity">
+		select * from ty_invitation_gift
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="modulUserId != null">
+			and modul_user_id = #{modulUserId}
+		</if>
+		<if test="modulId != null">
+			and modul_id = #{modulId}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="giftCode != null">
+			and gift_code = #{giftCode}
+		</if>
+		<if test="giftName != null">
+			and gift_name = #{giftName}
+		</if>
+		<if test="price != null">
+			and price = #{price}
+		</if>
+		<if test="orderNumber != null">
+			and order_number = #{orderNumber}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TyInvitationGiftEntity">
+		select * from ty_invitation_gift 
+		where id != -1
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="modulUserId != null">
+			and modul_user_id = #{modulUserId}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="orderNumber != null">
+			and order_number like concat('%', #{orderNumber}, '%')
+		</if>
+		order by createtime DESC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ty_invitation_gift 
+		where id != -1
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="modulUserId != null">
+			and modul_user_id = #{modulUserId}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TyInvitationGiftEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into ty_invitation_gift
+		(
+			`modul_user_id`, 
+			`modul_id`, 
+			`user_id`, 
+			`name`, 
+			`gift_code`, 
+			`gift_name`, 
+			`price`, 
+			`order_number`, 
+			`status`, 
+			`createtime`
+		)
+		values
+		(
+			#{modulUserId}, 
+			#{modulId}, 
+			#{userId}, 
+			#{name}, 
+			#{giftCode}, 
+			#{giftName}, 
+			#{price}, 
+			#{orderNumber}, 
+			#{status}, 
+			#{createtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TyInvitationGiftEntity">
+		update ty_invitation_gift 
+		<set>
+			<if test="modulUserId != null">`modul_user_id` = #{modulUserId}, </if>
+			<if test="modulId != null">`modul_id` = #{modulId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="giftCode != null">`gift_code` = #{giftCode}, </if>
+			<if test="giftName != null">`gift_name` = #{giftName}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="orderNumber != null">`order_number` = #{orderNumber}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ty_invitation_gift where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from ty_invitation_gift where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

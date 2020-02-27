@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TcUserDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TcUserEntity">
+		select * from tc_user where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TcUserEntity">
+		select * from tc_user
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="openid != null">
+			and openid = #{openid}
+		</if>
+		<if test="nickname != null">
+			and nickname = #{nickname}
+		</if>
+		<if test="headimgurl != null">
+			and headimgurl = #{headimgurl}
+		</if>
+		<if test="wallet != null">
+			and wallet = #{wallet}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TcUserEntity">
+		select * from tc_user 
+		where id != -1
+		<if test="keywod != null">
+			and (id like concat('%', #{keywod}, '%') or nickname like concat('%', #{keywod}, '%'))
+		</if>
+		order by wallet DESC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tc_user 
+		where id != -1
+		<if test="keywod != null">
+			and (id like concat('%', #{keywod}, '%') or nickname like concat('%', #{keywod}, '%'))
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TcUserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tc_user
+		(
+			`openid`, 
+			`nickname`, 
+			`headimgurl`, 
+			`wallet`, 
+			`createtime`, 
+			`status`
+		)
+		values
+		(
+			#{openid}, 
+			#{nickname}, 
+			#{headimgurl}, 
+			#{wallet}, 
+			#{createtime}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TcUserEntity">
+		update tc_user 
+		<set>
+			<if test="openid != null">`openid` = #{openid}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="headimgurl != null">`headimgurl` = #{headimgurl}, </if>
+			<if test="wallet != null">`wallet` = #{wallet}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 账户充值 -->
+	<update id="addWallet" parameterType="java.util.Map">
+		update tc_user set wallet=wallet+#{wallet} where id=#{id};
+	</update>
+	
+	<!-- 账户扣除 -->
+	<update id="reduceWallet" parameterType="java.util.Map">
+		update tc_user set wallet=wallet-#{wallet} where id=#{id};
+	</update>
+	
+	<delete id="delete">
+		delete from tc_user where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tc_user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

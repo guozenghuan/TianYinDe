@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>业务员账号</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<label style="float: left;line-height: 32px;">关键字:</label>
+		<input type="text" class="form-control" style="width: 20%;float: left;margin-right: 10px;" v-model="keyword" @keyup.enter="query" placeholder="姓名或手机号或账号(可按回车键查询)">
+		
+		<label style="float: left;line-height: 32px;">公司:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 16%;margin-right: 10px;" data-live-search="true" v-model="company_id">
+			   <option value="-1" selected="selected">全部</option>
+	           <option v-for="company in this.companyAll" v-bind:value="company.id">{{ company.name }}</option>
+		</select>
+		
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+		
+		<a href="tsuser_add.html" class="btn btn-success" id="addTsUserIdBtn">新增信息</a>
+	</div>
+    <table id="jqGridTsUser"></table>
+    <div id="jqGridPagerTsUser"></div>
+</div>
+
+<script src="${rc.contextPath}/js/tsuser/tsuser.js?_${date.systemTime}"></script>
+</body>
+</html>

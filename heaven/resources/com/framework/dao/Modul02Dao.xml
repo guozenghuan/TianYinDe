@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.Modul02Dao">
+
+	<select id="queryObject" resultType="com.framework.entity.Modul02Entity">
+		select * from modul_02 where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.Modul02Entity">
+		select * from modul_02
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="modulPath != null">
+			and modul_path = #{modulPath}
+		</if>
+		<if test="modulType != null">
+			and modul_type = #{modulType}
+		</if>
+		<if test="image01 != null">
+			and image_01 = #{image01}
+		</if>
+		<if test="image02 != null">
+			and image_02 = #{image02}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.Modul02Entity">
+		select * from modul_02 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from modul_02 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.Modul02Entity" useGeneratedKeys="true" keyProperty="id">
+		insert into modul_02
+		(
+			`modul_path`, 
+			`modul_type`, 
+			`image_01`, 
+			`image_02`
+		)
+		values
+		(
+			#{modulPath}, 
+			#{modulType}, 
+			#{image01}, 
+			#{image02}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.Modul02Entity">
+		update modul_02 
+		<set>
+			<if test="modulPath != null">`modul_path` = #{modulPath}, </if>
+			<if test="modulType != null">`modul_type` = #{modulType}, </if>
+			<if test="image01 != null">`image_01` = #{image01}, </if>
+			<if test="image02 != null">`image_02` = #{image02}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from modul_02 where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from modul_02 where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

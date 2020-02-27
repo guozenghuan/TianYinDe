@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<label style="float: left;line-height: 32px;">商品名称:</label>
+		<input type="text" class="form-control" style="width: 20%;float: left;margin-right: 10px;" v-model="title" @keyup.enter="query" placeholder="商品名称(可按回车键查询)">
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+		<a href="tycommodity_add.html" class="btn btn-success">新增信息</a>
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+
+
+<script src="${rc.contextPath}/js/tycommodity/tycommodity.js?_${date.systemTime}"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>模板信息表</title>
+<link rel="stylesheet" href="../../../statics/modulshow/css/styles.css" />
+<!-- 图片裁剪 -->
+<link rel="stylesheet" type="text/css" href="../../../statics/cropping/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../../../statics/cropping/css/component.css" />
+    
+#parse("sys/header.html")
+
+<!--layer弹窗插件-->
+<link href="../../../statics/layer_mobile/need/layer.css" rel="stylesheet" />
+<script type="text/javascript" src="../../../statics/layer_mobile/layer.js"></script>
+
+<!-- 图片裁剪 -->
+<script src="../../../statics/cropping/js/component.js"></script>
+</head>
+<body>
+	<div id="rrapp" v-cloak>
+		<div class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">音乐</div>
+					<div class="col-sm-10">
+						<select class="selectpicker show-tick form-control" data-live-search="true" v-model="modul.musicId">
+				           <option v-for="modulMusic in this.modulMusicList" v-bind:value="modulMusic.id" selected="selected">{{ modulMusic.name }}</option>
+					    </select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">模板状态</div>
+					<div class="col-sm-10">
+						<select class="selectpicker show-tick form-control" data-live-search="true" v-model="modul.status">
+				           <option value="show" selected="selected">显示</option>
+				           <option value="hide">隐藏</option>
+					  	</select>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="panel panel-default" style="text-align: center;background: whitesmoke;">
+			<iframe id="modulIframeId" scrolling="yes" frameborder="0" style="width: 400px;height: 610px;margin-left: 20px;" :src="modul.modulNameAndId+'?status=1&timestamp='+timestamp"></iframe>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div>
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="保存后添加模板" /> 
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回" />
+		</div>
+		
+	</div>
+	
+	<div id="upLoderImageDIVId" style="display: none;"><input id="upLoderImageId" type="file" accept="image/*" style="display: none;"></div>
+
+	<script src="${rc.contextPath}/js/modul/modul_add.js?_${date.systemTime}"></script>
+	<script src="../../../statics/modulshow/js/modernizr-1.5.min.js"></script> 
+	<script src="../../../statics/modulshow/js/jquery.mousewheel.js"></script> 
+	<script src="../../../statics/modulshow/js/scripts.js"></script>
+	
+</body>
+</html>

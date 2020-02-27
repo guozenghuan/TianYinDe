@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TsSchedulingPaiDanDao">
+   
+    <select id="queryDate" resultType="int">
+       select count(*) from ts_scheduling_paidan 
+       where date = #{dateStr}
+    </select>
+    
+    <delete id="deleteAll">
+       delete from ts_scheduling_paidan where id != -1
+    </delete>
+    
+    <delete id="deleteById">
+       delete from ts_scheduling_paidan where ts_user_id = #{tsUserId}
+    </delete>
+    
+    <update id="addNumber" parameterType="com.framework.entity.TsSchedulingPaiDanEntity">
+       update ts_scheduling_paidan 
+       set 
+         number = #{number}
+       where id = #{id}
+    </update>
+    
+    <select id="queryDateMin" resultType="com.framework.entity.TsSchedulingPaiDanEntity">
+       select * from ts_scheduling_paidan 
+       where (number IN(select MIN(number) from ts_scheduling_paidan ))
+    </select>
+    
+    <insert id="savePaiDan" parameterType="com.framework.entity.TsSchedulingPaiDanEntity"
+            useGeneratedKeys="true" keyProperty="id">
+       insert into ts_scheduling_paidan 
+       (
+         `ts_user_id`,
+         `number`,
+         `date`,
+         `createtime`
+       )
+       values
+       (
+         #{tsUserId},
+         #{number},
+         #{date},
+         #{createtime}
+       )  
+    </insert>
+    
+    <select id="queryObjectByUS" resultType="com.framework.entity.TsSchedulingPaiDanEntity">
+      select * from ts_scheduling_paidan 
+      where 
+      ts_user_id = #{tsUserId} and date = #{tsScheduling}
+    </select>
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

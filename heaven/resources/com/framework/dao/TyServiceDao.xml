@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TyServiceDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TyServiceEntity">
+		select * from ty_service where id = #{value}
+	</select>
+	
+	<!-- 小于，上移 -->
+	<select id="shangyiMain" resultType="com.framework.entity.TyServiceEntity">
+		SELECT * from ty_service where type='fuwu' and sort &lt; #{value} ORDER BY sort DESC limit 0, 1
+	</select>
+	<!-- 大于，下移 -->
+	<select id="xiayiMain" resultType="com.framework.entity.TyServiceEntity">
+		SELECT * from ty_service where type='fuwu' and sort &gt; #{value} ORDER BY sort ASC limit 0, 1
+	</select>
+	
+	<select id="shangyiMainScd" resultType="com.framework.entity.TyServiceEntity">
+		SELECT * from ty_service where parent_id=#{parentId} and sort &lt; #{sort} ORDER BY sort DESC limit 0, 1
+	</select>
+	
+	<select id="xiayiMainScd" resultType="com.framework.entity.TyServiceEntity" parameterType="com.framework.entity.TyServiceEntity" >
+		SELECT * from ty_service where parent_id=#{parentId} and sort &gt; #{sort} ORDER BY sort ASC limit 0, 1
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TyServiceEntity" parameterType="com.framework.entity.TyServiceEntity" >
+		select * from ty_service
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="parentId != null">
+			and parent_id = #{parentId}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="text != null">
+			and text = #{text}
+		</if>
+		<if test="sort != null">
+			and sort = #{sort}
+		</if>
+	</select>
+	
+	<select id="queryObjectByKeySort" resultType="com.framework.entity.TyServiceEntity">
+		select * from ty_service
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="parentId != null">
+			and parent_id = #{parentId}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="text != null">
+			and text = #{text}
+		</if>
+		order by sort ASC
+	</select>
+	
+	<select id="queryObjectByKeySortUser" resultType="com.framework.entity.TyServiceEntity">
+		select * from ty_user_service
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="parentId != null">
+			and parent_id = #{parentId}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="text != null">
+			and text = #{text}
+		</if>
+		order by sort ASC
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TyServiceEntity">
+		select * from ty_service 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ty_service 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TyServiceEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into ty_service
+		(
+			`parent_id`, 
+			`type`, 
+			`name`, 
+			`unit_price`,
+			`cost_price`,
+			`text`,
+			`sort`
+		)
+		values
+		(
+			#{parentId}, 
+			#{type}, 
+			#{name}, 
+			#{unitPrice},
+			#{costPrice},
+			#{text},
+			#{sort}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TyServiceEntity">
+		update ty_service 
+		<set>
+			<if test="parentId != null">`parent_id` = #{parentId},</if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="unitPrice != null">`unit_price` = #{unitPrice},</if>
+			<if test="costPrice != null">`cost_price` = #{costPrice},</if>
+			<if test="text != null">`text` = #{text}, </if>
+			<if test="sort != null">`sort` = #{sort} </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ty_service where id = #{value}
+	</delete>
+	
+	<delete id="deleteFwAll">
+		delete from ty_service where parent_id = #{value} or id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from ty_service where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

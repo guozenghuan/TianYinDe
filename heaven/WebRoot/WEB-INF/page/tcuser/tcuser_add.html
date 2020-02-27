@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户信息</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">用户openid</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tcUser.openid" placeholder="用户openid"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">用户昵称</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tcUser.nickname" placeholder="用户昵称"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">用户头像</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tcUser.headimgurl" placeholder="用户头像"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">钱包</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tcUser.wallet" placeholder="钱包"/>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/tcuser/tcuser_add.js?_${date.systemTime}"></script>
+</body>
+</html>

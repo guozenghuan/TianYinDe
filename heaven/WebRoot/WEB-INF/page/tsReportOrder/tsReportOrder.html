@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<label style="float: left;line-height: 32px;">审核状态:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 16%;margin-right: 10px;" data-live-search="true" v-model="auditStatus">
+	           <option value="1">审核未通过</option>
+	           <option value="2" selected="selected">审核已通过</option>
+	           <option value="3">未审核</option>
+		</select>
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+		<div style="clear:both;"></div>
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<script src="${rc.contextPath}/js/tsReportOrder/tsReportOrder.js?_${date.systemTime}"></script>
+</body>
+</html>

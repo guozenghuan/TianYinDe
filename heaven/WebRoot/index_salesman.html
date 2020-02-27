@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天胤德业务员后台</title>
+    <link rel="shortcut icon" href="statics/images/logo.ico" /> 
+    <link rel="stylesheet" href="statics/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="statics/css/bootstrap.min.css">
+    <!-- 列表信息 -->
+	<link rel="stylesheet" type="text/css" href="statics/leaderboard/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="statics/leaderboard/css/jq22-demo.css">
+	<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+	<link rel="stylesheet" href="statics/leaderboard/css/style_phone.css">
+	
+	<link href="statics/layer_mobile/need/layer.css"/>
+    
+    <script src="statics/libs/jquery.min.js"></script>
+	<script src="statics/libs/vue.min.js"></script>
+	<script src="statics/libs/router.js"></script>
+	<script src="statics/libs/bootstrap.min.js"></script>
+	<script src="statics/libs/jquery.slimscroll.min.js"></script>
+	<script src="statics/libs/fastclick.min.js"></script>
+	<script src="statics/libs/app.js"></script>
+	<script src="statics/layer_mobile/layer.js"></script>
+	<script src="statics/js/tools.js"></script>
+	
+    <style type="text/css">
+		[v-cloak] {
+			display: none;
+		}
+
+		html,
+		body {
+			overflow-x: hidden;
+			/* 防止双击缩放 */
+			touch-action: manipulation;
+		}
+
+		.touch_action {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		/*中间菜单样式*/
+		.center_btn {
+			height: 180px;
+			width: 100%;
+			box-shadow: 0px 30px 48px -15px #ccc;
+			position: fixed;
+			left: 0px;
+			bottom: 0px;
+			background: white;
+		}
+
+		.center_btn_three {
+			height: 95%;
+			width: 20%;
+			float: left;
+			text-align: center;
+			background: white;
+			border-radius: 50px 50px 50px 50px;
+		}
+
+		/* .center_btn_three:active{
+               background: #f4eefa;
+           }*/
+
+		.center_btn_three img {
+			margin-top: 29px;
+		}
+
+		.center_btn_three div {
+			font-size: 38px;
+			font-weight: bolder;
+			margin-top: 8px;
+		}
+
+		/*房源信息样式*/
+		.housing {
+			width: 100%;
+		}
+		.housing_list{
+			border-radius: 6px;
+			margin: 30px;
+			padding: 30px;
+			background-color: white;
+			overflow: hidden;
+		}
+		
+		.housing_details {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			overflow: hidden;
+		}
+		.details-title{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: #f2f2f2 1px solid;
+			padding-bottom: 30px;
+			margin-bottom: 30px;
+			font-size: 34px;
+		}
+		.housing_img_div {
+			/* width: 20%; */
+			/* float: left; */
+		}
+
+		.housing_img_div img {
+			float: right;
+		}
+
+		.housing_details_div {
+			/* width: 80%; */
+			/* height: 100%; */
+			/* float: left; */
+		}
+
+		.details_one {
+			font-size: 38px;
+			font-weight: bold;
+		}
+
+		.details_two {
+			font-size: 32px;
+			color: #888;
+		}
+
+		.details_three {
+			padding: 20px 0;
+			text-align: left;
+			/* font-weight: bold; */
+			color: #d75d5d;
+			font-size: 35px;
+		}
+		.housing_list .submit{
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			padding-top: 40px;
+		}
+		.housing_list .submit .button{
+			display: block;
+			/* width: 40%; */
+			padding: 0 40px;
+			height: 80px;
+			line-height: 80px;
+			background-color: #f0f0f0;
+			margin-left: 30px;
+			border-radius: 80px;
+			text-align: center;
+			font-size: 34px;
+		}
+		.housing_list .submit a.button{
+			background-color: #d75d5d;
+		}
+
+		/*弹窗样式*/
+		.center_btn_alert {
+			height: 100px;
+			width: 100%;
+			box-shadow: 0px 30px 48px -15px #ccc;
+			position: fixed;
+			left: 0px;
+			bottom: 0px;
+			z-index: 2;
+			background: white;
+		}
+
+		.center_btn_alert_one, .center_btn_alert_two {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 95%;
+			text-align: center;
+			background: white;
+			border-radius: 50px;
+			border: 3px solid #4d4e54;
+		}
+
+		.center_btn_alert_one {
+			float: left;
+			width: 55%;
+			margin-left: 10px;
+		}
+		
+		.center_btn_alert_two {
+			width: 40%;
+			float: right;
+			margin-right: 10px;
+		}
+		
+		.center_btn_alert_one img {
+			vertical-align: middle;
+		}
+
+		.center_btn_alert_one div {
+			font-weight: bolder;
+		}
+
+		.center_btn_alert_two img {
+			vertical-align: middle;
+		}
+
+		.center_btn_alert_two div {
+			font-weight: bolder;
+		}
+
+		/*订单信息展示*/
+		.housing_alert {
+			width: 100%;
+			height: auto;
+		}
+
+		.housing_alert_details_div {
+			width: 100%;
+			float: left;
+			margin-bottom: 10px;
+		}
+
+		.layui-m-layerbtn {
+			display: box;
+			display: -moz-box;
+			display: -webkit-box;
+			width: 100%;
+			height: 68px;
+			line-height: 68px;
+			font-size: 45px;
+			border-top: 1px solid #D0D0D0;
+			background-color: #F2F2F2;
+		}
+
+		.layui-m-layerbtn span {
+			display: block;
+			box-flex: 1;
+			-moz-box-flex: 1;
+			-webkit-box-flex: 1;
+			font-size: 43px;
+			cursor: pointer;
+		}
+
+		.layui-m-layercont {
+			padding: 6px 5px;
+			line-height: 60px;
+			text-align: center;
+			font-size: 38px;
+		}
+		 .change-btn{ 
+		    
+		 
+			background: orange;
+		 } 
+	
+       </style>
+</head>
+<body class="touch_action" style="background: #f2f2f2;">
+
+<div id="rrapp" v-cloak>
+
+	<!--中间菜单-->
+	<div class="center_btn">
+	   <div name="weifukuan" class="center_btn_three">
+	        <img src="statics/images/two.png">
+	        <div>新订单</div>
+	    </div>
+	   
+	    <div name="fuwuzhong" class="center_btn_three" style="background: #f4eefa;">
+	        <img src="statics/images/one.png">
+	        <div>服务中</div>
+	    </div>
+	    
+	    <div name="ywok" class="center_btn_three">
+	        <img src="statics/images/ywok.png">
+	        <div>已确认</div>
+	    </div>
+	    <div name="ok" class="center_btn_three">
+	        <img src="statics/images/three.png">
+	        <div>已完成</div>
+	    </div>
+	    <div name="error" class="center_btn_three">
+	        <img src="statics/images/four.png">
+	        <div>已失败</div>
+	    </div>
+	</div>
+	
+	<!--底部房源信息-->
+	<div class="housing">
+		
+	    <div class="housing_list" v-for="dataser in serviceData" :id="'housingID_'+dataser.id">
+	    	<div class="details-title">
+	    		<div>单号: {{ dataser.number }}</div>
+	    		<div>
+	                <a :href="telPhoneStr(dataser.phone)"><img src="statics/images/index_phone.png"></a>
+	            </div>
+	    	</div>
+	    	<div class="housing_details">
+	    		<div class="housing_details_div">
+	    			<div class="details_one">客户：&nbsp;{{ dataser.name }} - ID:&nbsp;{{dataser.userid}}</div>
+		            <div style="display: flex; align-items: center;">
+		            	<div class="details_three" v-if="dataser.serviceStatus == 1">
+		            		服务总价: ￥{{dataser.price}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            	</div>
+		            	<div class="details_three" v-if="dataser.serviceStatus == 0">服务总价: 未报价</div>
+			            <div class="details_two" v-if="dataser.priceStatus == 1">(客户线上已付款)</div>
+			            <div class="details_two" v-if="dataser.priceStatus == 2">(客户线下付款-先服务后收款)</div>
+		            </div>
+		            <div class="details_three">
+		            	<i class="fa fa-star" style="color: #f4940d;font-size: 50px;" v-for="xinx in dataser.score" v-if="dataser.priceStatus == 1 && dataser.score != null && dataser.status == 1"></i>
+		            	<i style="color: rgb(123, 123, 123);font-size: 38px;" v-if="dataser.userStatus == 1 && dataser.score == null && dataser.status == 1">用户未评价</i>
+		            	<i style="color: rgb(123, 123, 123);font-size: 38px;" v-if="dataser.userStatus == 0">等待客户确认</i>
+					</div>
+					<div class="details_two" style="font-size: 38px;padding-bottom:20px;''" v-if="dataser.userStatus == 1">业务员提成：{{ dataser.commission }}</div>
+		            <div class="details_two" v-html="dateForStr(dataser.createtime)"></div>
+		            
+		        </div>
+	    	</div>
+	        
+	        <div class="submit">
+	            <div class="button" :name="dataser.id" @click="openWindos(dataser.id);" v-if="status === 'weifukuan' || status === 'fuwuzhong'">
+               		编辑订单
+	            </div>
+	            <div class="button" @click="openZd(dataser.number, dataser.tsUserid);" v-if="status === 'weifukuan'">
+               		转单
+	            </div>
+	            <a v-if="dataser.auditState === 0" style="background-color: rgb(238, 238, 238);" class="button">报价单审核中</a>
+	            <div class="button" @click="sbdd(dataser.id, dataser.userid);" v-if="status === 'ywok'">
+               		上报订单
+	            </div>
+	        </div>
+	    </div>
+	    
+	</div>
+	
+	<div style="background: rgb(251, 247, 247); width: 80%; line-height: 88px; text-align: center; font-size: 34px; border: 2px dashed rgb(136, 136, 136); border-radius: 50px; margin: 70px 0px 0px 10%;" @click="pageDataOrderMsg">{{pageText}}</div>
+	    
+	<div class="housing_img_div"><div style="height: 550px;"> </div></div>
+
+</div>
+
+<script src="statics/salesman/index_salesman.js"></script>
+<script type="text/javascript">
+/*菜单点击背景变化*/
+$(".center_btn_three").click(function () {
+    $(".center_btn_three").css("background","white");
+    $(this).css("background","#f4eefa");
+    
+    var nameType = $(this).attr("name");
+    
+    vm.status = nameType;
+    console.log('vm.status: ', vm.status)
+    vm.getServiceOrderData(1);
+    vm.page = 1;
+});
+</script>
+
+</body>
+</html>

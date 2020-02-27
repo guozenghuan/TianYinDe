@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TsSchedulingDao">
+
+	<select id="queryListObject" resultType="com.framework.entity.TsSchedulingEntity">
+		select * from ts_scheduling 
+		where id != -1
+		order by if(isnull(tsscheduling),1,0),tsscheduling
+		limit #{page}, #{limit}
+	</select>
+    
+	<select id="queryTotalAll" resultType="int">
+		select count(*) from ts_scheduling 
+		where ts_user_id != -1
+	</select>
+    
+
+	<select id="queryList" resultType="com.framework.entity.TsSchedulingEntity">
+		select * from ts_scheduling tb1
+		where tb1.id != -1
+		<if test="keywod != null">
+			and (tb1.ts_user_id like concat('%', #{keyword}, '%') or
+			name like concat('%', #{keyword}, '%') or phone like
+			concat('%', #{keyword}, '%'))
+		</if>
+		<if test="company != null ">
+			and company = #{company}
+		</if> 
+		order by if(isnull(tsscheduling),1,0),tsscheduling
+		limit #{page}, #{limit}
+	</select>
+
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from ts_scheduling 
+		where ts_user_id != -1
+		<if test="keywod != null">
+			and (tsUserId like concat('%', #{keyword}, '%') or
+			name like concat('%', #{keyword}, '%') or phone like
+			concat('%', #{keyword}, '%'))
+		</if>
+		<if test="company != null">
+			and company = #{company}
+		</if>
+	</select>
+
+	<update id="update" parameterType="com.framework.entity.TsSchedulingEntity">
+		update ts_scheduling
+		set
+		ts_user_id = #{tsUserId},
+		company = #{company},
+		portrait_url = #{portraitUrl},
+		name = #{name},
+		phone = #{phone},
+		account = #{account},
+		scheduling = #{scheduling},
+		createtime = #{createtime},
+		tsscheduling = #{tsscheduling}
+		where id = #{id}
+	</update>
+
+	<insert id="saveYWY" parameterType="com.framework.entity.TsSchedulingEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into ts_scheduling
+		(
+		`ts_user_id`,
+		`company`,
+		`portrait_url`,
+		`name`,
+		`phone`,
+		`account`,
+		`scheduling`,
+		`createtime`,
+		`tsscheduling`
+		)
+		values
+		(
+		#{tsUserId},
+		#{company},
+		#{portraitUrl},
+		#{name},
+		#{phone},
+		#{account},
+		#{scheduling},
+		#{createtime},
+		#{tsscheduling}
+		)
+	</insert>
+
+	<select id="queryObjectByUserId" resultType="com.framework.entity.TsSchedulingEntity">
+		select * from ts_scheduling where id = #{id}
+	</select>
+		
+	<select id="queryObjectByTS" resultType="com.framework.entity.TsSchedulingEntity">
+		select * from ts_scheduling where ts_user_id = #{tsUserId}
+	</select>
+	
+	<select id="queryListObjectByTS" resultType="com.framework.entity.TsSchedulingEntity">
+		select * from ts_scheduling where ts_user_id = #{tsUserId}
+	</select>
+
+	<delete id="delete">
+		delete from ts_scheduling where ts_user_id = #{tsUserId}
+	</delete>
+	
+	<delete id="deleteById"> 
+	 delete from ts_scheduling where  id = #{id}
+	</delete>
+	
+	<select id="queryListByDate" resultType="com.framework.entity.TsSchedulingEntity">
+		select * from ts_scheduling where scheduling = #{scheduling}
+	</select>
+
+	<select id="querySchedulingByDate" resultType="Long">
+		select ts_user_id from ts_scheduling where scheduling = #{scheduling}
+	</select>
+
+	<delete id="deleteBatch">
+		delete from ts_scheduling where ts_user_id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="queryListUserIdByDate" resultType="Long">
+		select ts_user_id from ts_scheduling
+		where scheduling = #{dateStr}
+	</select>
+	
+	<select id="queryTotalByAccount" resultType="int">
+	  select count(*) from ts_scheduling
+	  where account = #{ch}
+	</select>
+	
+	<select id="queryObjectByMap" resultType="com.framework.entity.TsSchedulingEntity">
+	  select * from ts_scheduling
+	  where id != -1
+	  <if test="account != null">
+	  and account = #{account}
+	  </if>
+	  <if test="tsUserId != null">
+      ts_user_id = #{tsUserId}
+     </if>
+	  
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TsSchedulingEntity">
+	  select * from ts_scheduling
+	  where id != -1
+	  <if test="tsUserId != null">
+	  and ts_user_id = #{tsUserId}
+	  </if>
+	   <if test="account != null">
+	  and account = #{account}
+	  </if>
+	</select>
+	
+	<!-- DISTINCT -->
+	<select id="queryTsScheduling" resultType="String">
+	  select DISTINCT account from ts_scheduling where id != -1
+	  and scheduling = #{scheduling} 
+	  or company = (select DISTINCT company from ts_scheduling where ts_user_id = #{tsUserId})
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

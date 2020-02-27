@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>业务员账号</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">类型</div>
+		   	<div class="col-sm-10">
+		      <select class="selectpicker show-tick form-control" data-live-search="true" v-model="form.tsItemSort">
+		           <option v-for="ts in tsItemSort" :value="ts.value">{{ ts.label }}</option>
+			  </select>
+		    </div>
+		</div>
+		
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">提成利率</div>
+		   	<div class="col-sm-10">
+		      <input type="number" class="form-control" v-model="form.rate" placeholder="提成利率" />
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">项目</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="form.item" placeholder="项目名称"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">单位</div>
+		   	<div class="col-sm-10">
+		      <input type="number" class="form-control" v-model="form.unit" placeholder="单位"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">单件成本</div>
+		   	<div class="col-sm-10">
+		      <input type="number" class="form-control" v-model="form.price" placeholder="单位成本"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">备注</div>
+		   	<div class="col-sm-10">
+		      <input type="textarea" class="form-control" v-model="form.remark" placeholder="备注"/>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/tsItemAndService/tsItemAndService_add.js?_${date.systemTime}"></script>
+</body>
+</html>

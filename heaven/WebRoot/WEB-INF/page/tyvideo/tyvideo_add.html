@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>视频展示</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">视频标题</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyVideo.title" placeholder="视频标题" maxlength="50"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">视频详情</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyVideo.note" placeholder="视频详情" maxlength="50"/>
+		    </div>
+		</div>
+		
+		<!-- <div class="form-group">
+		   	<div class="col-sm-2 control-label">封面图(不上传则默认截取视频中第5秒的画面)</div>
+		   	<div class="col-sm-10">
+		      <a class="btn btn-primary" style="padding: 6px 6px;margin-left: 6px;margin-top: 3px;">
+		      	<input type="file" accept="image/jpg,image/jpeg,image/x-png" @change="uploadMainImage">
+		      </a>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label"></div>
+		   	<div class="col-sm-10">
+		      <img alt="" :src="mainImage" style="width: 194px;height: 120px;">
+		    </div>
+		</div> -->
+		
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">视频</div>
+		   	<div class="col-sm-10">
+		      <a class="btn btn-primary" style="padding: 6px 6px;margin-left: 6px;margin-top: 3px;">
+		      	<!-- <input type="file" accept="video/avi,video/mpg,video/wmv,video/3gp,video/mov,video/mp4,video/asf,video/asx,video/flv,video/mkv" @change="uploadVideo"> -->
+		      	<input type="file" accept="video/mp4" @change="uploadVideo">
+		      </a>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label"></div>
+		   	<div class="col-sm-10">
+		      <video :src="mainVideo" controls="controls" style="width: 390px;height: 250px;"></video>
+		    </div>
+		</div>
+		
+		<!-- <div class="form-group">
+		   	<div class="col-sm-2 control-label">排序-默认顺序和id一样</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyVideo.sort" placeholder="排序-默认顺序和id一样"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">状态：0-显示，1-隐藏</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyVideo.status" placeholder="状态：0-显示，1-隐藏"/>
+		    </div>
+		</div> -->
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/tyvideo/tyvideo_add.js?_${date.systemTime}"></script>
+</body>
+</html>

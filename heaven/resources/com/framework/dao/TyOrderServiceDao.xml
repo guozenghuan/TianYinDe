@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TyOrderServiceDao">
+
+	<select id="queryObject"
+		resultType="com.framework.entity.TyOrderServiceEntity">
+		select * from ty_order_service where id = #{value}
+	</select>
+
+	<select id="queryObjectByKey"
+		resultType="com.framework.entity.TyOrderServiceEntity">
+		select * from ty_order_service
+		where id != -1
+		<if test="auditState != null">
+			and audit_state = #{auditState}
+		</if>
+		<if test="pid != null">
+			and pid = #{pid}
+		</if>
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="userid != null">
+			and userid = #{userid}
+		</if>
+		<if test="number != null">
+			and number = #{number}
+		</if>
+		<if test="servicePrice != null">
+			and service_price = #{servicePrice}
+		</if>
+		<if test="payStatus != null">
+			and pay_status = #{payStatus}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+		<if test="tsUserStatus != null">
+			and ts_user_status = #{tsUserStatus}
+		</if>
+		<if test="tsUserid != null">
+			and ts_userid = #{tsUserid}
+		</if>
+		<if test="serviceStatus != null">
+			and service_status = #{serviceStatus}
+		</if>
+		<if test="price != null">
+			and price = #{price}
+		</if>
+		<if test="note != null">
+			and note = #{note}
+		</if>
+		<if test="priceStatus != null">
+			and price_status = #{priceStatus}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="userStatus != null">
+			and user_status = #{userStatus}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="evaluate != null">
+			and evaluate = #{evaluate}
+		</if>
+	</select>
+	<!-- -->
+
+	<select id="queryList"
+		resultType="com.framework.entity.TyOrderServiceEntity">
+		select * from ty_order_service
+		where id != -1
+		<if test="keywod != null">
+			and (userid like concat('%', #{keywod}, '%') or number
+			like concat('%', #{keywod}, '%') or ts_userid like concat('%',
+			#{keywod}, '%'))
+		</if>
+		<if test="tsUserStatus != null">
+			and ts_user_status=#{tsUserStatus}
+		</if>
+
+		<if test="priceStatus != null ">
+			and price_status=#{priceStatus}
+		</if>
+
+		<if test="priceStatusTwo != null">
+			and (price_status=1 or price_status=2 or price_status=0)
+		</if>
+		<if test="status != null">
+			and status=#{status}
+		</if>
+		<if test="userStatus != null">
+			and user_status=#{userStatus}
+		</if>
+		<if test="tsUserid != null">
+			and ts_userid=#{tsUserid}
+		</if>
+		<if test="pid == -100">
+			and pid >0
+		</if>
+		<if test="pid != null and  pid!=-100">
+			and pid=#{pid}
+		</if>
+		<if test="auditState != null">
+			and audit_state=#{auditState}
+		</if>
+
+		<if test="fwz != null">
+			and fwz = #{fwz}
+		</if>
+
+		and pay_status = 1
+		order by createtime DESC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+
+	<select id="queryListSure"
+		resultType="com.framework.entity.TyOrderServiceEntity">
+		select * from ty_order_service where id != -1
+		<if test="tsUserid != null">
+			and ts_userid = #{tsUserid}
+		</if> 
+		<if test="fwz != null ">
+			and fwz = #{fwz}
+		</if>
+	   <if test="auditStatusOne != null">
+		   and ((audit_state = 0 or audit_state = 2 or audit_state = 3)or (audit_state = 1 and user_status = 0))
+		</if> 
+		
+		order by createtime DESC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+
+	<select id="queryTotalSure" resultType="int">
+		select count(*) from ty_order_service where id != -1
+		<if test="tsUserid != null">
+			and ts_userid = #{tsUserid}
+		</if>
+		<if test="fwz != null ">
+			and fwz = #{fwz}
+		</if>
+		
+		<if test="auditStatusOne != null">
+		   and ((audit_state = 0 or audit_state = 2 or audit_state = 3)or (audit_state = 1 and user_status = 0))
+		</if>
+	 
+	</select>
+
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from ty_order_service
+		where id != -1
+		<if test="keywod != null">
+			and (userid like concat('%', #{keywod}, '%') or number
+			like concat('%', #{keywod}, '%') or ts_userid like concat('%',
+			#{keywod}, '%'))
+		</if>
+		<if test="tsUserStatus != null">
+			and ts_user_status=#{tsUserStatus}
+		</if>
+		<if test="priceStatus != null">
+			and price_status=#{priceStatus}
+		</if>
+		<if test="priceStatusTwo != null">
+			and (price_status=1 or price_status=2 or price_status=0)
+		</if>
+		<if test="status != null">
+			and status=#{status}
+		</if>
+		<if test="userStatus != null">
+			and user_status=#{userStatus}
+		</if>
+		<if test="tsUserid != null">
+			and ts_userid=#{tsUserid}
+		</if>
+		<if test="pid == -100">
+			and pid>0
+		</if>
+
+		<if test="fwz != null">
+			and fwz = #{fwz}
+		</if>
+
+		<if test="auditState != null">
+			and audit_state=#{auditState}
+		</if>
+
+	</select>
+
+	<insert id="save"
+		parameterType="com.framework.entity.TyOrderServiceEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into ty_order_service
+		(
+		`userid`,
+		`number`,
+		`service_price`,
+		`pay_status`,
+		`name`,
+
+		`phone`,
+		`createtime`,
+		`ts_user_status`,
+		`ts_userid`,
+		`service_status`,
+
+		`price`,
+		`note`,
+		`price_status`,
+		`status`,
+		`user_status`,
+
+		`score`,
+		`evaluate`,
+		`pid`,
+		`audit_state`,
+		`commission`,
+		`fwz`,
+		`deposit`,
+		`is_collect`,
+		`dep_stu`
+		)
+		values
+		(
+		#{userid},
+		#{number},
+		#{servicePrice},
+		#{payStatus},
+		#{name},
+
+		#{phone},
+		#{createtime},
+		#{tsUserStatus},
+		#{tsUserid},
+		#{serviceStatus},
+
+		#{price},
+		#{note},
+		#{priceStatus},
+		#{status},
+		#{userStatus},
+
+		#{score},
+		#{evaluate},
+		#{pid},
+		#{auditState},
+		#{commission},
+		#{fwz},
+		#{deposit},
+		#{isCollect},
+		#{depStu}
+		)
+	</insert>
+
+	<update id="update"
+		parameterType="com.framework.entity.TyOrderServiceEntity">
+		update ty_order_service
+		<set>
+			<if test="userid != null">`userid` = #{userid}, </if>
+			<if test="number != null">`number` = #{number}, </if>
+			<if test="servicePrice != null">`service_price` = #{servicePrice}, </if>
+			<if test="payStatus != null">`pay_status` = #{payStatus}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="tsUserStatus != null">`ts_user_status` = #{tsUserStatus}, </if>
+			<if test="tsUserid != null">`ts_userid` = #{tsUserid}, </if>
+			<if test="serviceStatus != null">`service_status` = #{serviceStatus}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="note != null">`note` = #{note}, </if>
+			<if test="priceStatus != null">`price_status` = #{priceStatus}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="userStatus != null">`user_status` = #{userStatus}, </if>
+			<if test="score != null">`score` = #{score}, </if>
+			<if test="evaluate != null">`evaluate` = #{evaluate},</if>
+			<if test="pid != null">`pid` = #{pid},</if>
+			<if test="auditState != null">`audit_state` = #{auditState},</if>
+			<if test="commission != null">`commission` = #{commission},</if>
+			<if test="fwz != null">`fwz` = #{fwz},</if>
+			<if test="deposit != null">`deposit` = #{deposit},</if>
+			<if test="isCollect != null">`is_collect` = #{isCollect},</if>
+			<if test="depStu != null">`dep_stu` = #{depStu}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from ty_order_service where id = #{value}
+	</delete>
+
+	<delete id="deleteBatch">
+		delete from ty_order_service where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="queryObjectByUN"
+		resultType="com.framework.entity.TyOrderServiceEntity">
+		select * from ty_order_service
+		where id != -1
+		<if test=" number != null ">
+			and number = #{number}
+		</if>
+		<if test="tsUserId != null">
+			and ts_userid = #{tsUserId}
+		</if>
+	</select>
+
+	<update id="updateByNumber"
+		parameterType="com.framework.entity.TyOrderServiceEntity">
+		update ty_order_service
+		set
+		commission = 0.00
+		where number
+		= #{number}
+	</update>
+
+	<select id="queryTotalByCN" resultType="int">
+		select count(*) from
+		ty_order_service
+		where number = #{number} and ts_userid = #{tsUserId}
+	</select>
+
+	<select id="queryListByMap"
+		resultType="com.framework.entity.TyOrderServiceEntity">
+		select * from ty_order_service where id != -1
+		<if test="payStatus != null">
+			and pay_status = #{payStatus}
+		</if>
+		<if test="userid != null">
+			and userid = #{userid}
+		</if>
+
+		<if test="priceStatusOne != null">
+			and ( price_status = 0 or ( status = 0 and price_status =
+			2 ))
+		</if>
+
+		<if test="priceStatusThree != null">
+			and (( status = 1 and price_status = 2 ) or ( price_status
+			= 1 ))
+		</if>
+
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

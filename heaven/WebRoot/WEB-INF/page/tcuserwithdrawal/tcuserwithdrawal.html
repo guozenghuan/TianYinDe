@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>提现申请</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		
+		<label style="float: left;line-height: 32px;">关键字:</label>
+		<input type="text" class="form-control" style="width: 20%;float: left;margin-right: 10px;" v-model="keyword" @keyup.enter="query" placeholder="订单号或用户ID(可按回车键查询)">
+		
+		<label style="float: left;line-height: 32px;">状态:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 10%;margin-right: 10px;" data-live-search="true" v-model="status">
+			   <option value="-1" selected="selected">全部</option>
+	           <option value="shenqing">提现审核</option>
+	           <option value="tongguo">审核通过</option>
+	           <option value="shibai">提现失败</option>
+		</select>
+		
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+		
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+    
+    <!-- 操作提现 -->
+    <div id="topUpTree_tixian" style="display: none;padding:10px;">
+		<textarea id="tixianNoteId" rows="" cols="" placeholder="内容" class="form-control" style="width: 100%; height: 120px;"></textarea>
+		
+		<div id="wechatMsgId" class="panel panel-default" style="margin-top: 10px;display: none;">
+			<form class="form-horizontal">
+				<div class="form-group">
+				   	<div class="col-sm-2 control-label">微信昵称</div>
+				   	<div class="col-sm-10">
+				      <input type="text" class="form-control" v-model="userWechat.nickname" readonly="readonly"/>
+				    </div>
+				</div>
+				<div class="form-group">
+				   	<div class="col-sm-2 control-label">微信头像</div>
+				   	<div class="col-sm-10">
+				      <img class="img-circle" style="width: 90px;height: 90px;cursor: pointer;" :src="userWechat.headimgurl"/>
+				    </div>
+				</div>
+				<div class="form-group">
+				   	<div class="col-sm-2 control-label">微信收款码</div>
+				   	<div class="col-sm-10">
+				      <img style="width: 250px;height: 250px;cursor: pointer;" :src="wechatShoukuan" alt="头像"/>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- 体现详情 -->
+	<div id="topUpTree_tixian_xiangqing" style="display: none;padding:10px;">
+		<div class="panel panel-default" style="margin-top: 10px;">
+			<form class="form-horizontal">
+				<div class="form-group">
+				   	<div class="col-sm-2 control-label">微信昵称</div>
+				   	<div class="col-sm-10">
+				      <input type="text" class="form-control" v-model="userWechat.nickname" readonly="readonly"/>
+				    </div>
+				</div>
+				<div class="form-group">
+				   	<div class="col-sm-2 control-label">微信头像</div>
+				   	<div class="col-sm-10">
+				      <img class="img-circle" style="width: 90px;height: 90px;cursor: pointer;" :src="userWechat.headimgurl"/>
+				    </div>
+				</div>
+				<div class="form-group">
+				   	<div class="col-sm-2 control-label">微信收款码</div>
+				   	<div class="col-sm-10">
+				      <img style="width: 250px;height: 250px;cursor: pointer;" :src="wechatShoukuan" alt="头像"/>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+    
+</div>
+
+<script src="${rc.contextPath}/js/tcuserwithdrawal/tcuserwithdrawal.js?_${date.systemTime}"></script>
+</body>
+</html>

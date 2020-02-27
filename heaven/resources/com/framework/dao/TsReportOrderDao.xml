@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TsReportOrderDao">
+
+   <select id="queryOrderList" resultType="com.framework.entity.TsReportOrderEntity">
+     select * from ts_report_order where ts_user_id = #{tsUserId} 
+     order by checktime desc 
+     limit #{page},#{limit}
+   </select>
+   
+   <select id="queryOrderLists" resultType="com.framework.entity.TsReportOrderEntity">
+     select * from ts_report_order where  status = 1
+     limit #{page},#{limit}
+   </select>
+   
+   <!-- 未审核  -->
+   <select id="queryOrderListNoCheck" resultType="com.framework.entity.TsReportOrderEntity">
+     select * from ts_report_order where  status = 2
+     limit #{page},#{limit}
+   </select>
+   
+   <select id="queryOrderListCheck" resultType="com.framework.entity.TsReportOrderEntity">
+     select * from ts_report_order where  status = 0
+     limit #{page},#{limit}
+   </select>
+   
+   <select id="queryOrderTotalByUserId" resultType="int">
+     select count(*) from ts_report_order where ts_user_id = #{tsUserId}
+   </select>
+   
+   <select id="queryOrderTotalByTsUser" resultType="int">
+     select count(*) from ts_report_order where   status = 1
+   </select>
+   
+   <select id="queryOrderTotalByStatuOne" resultType="int">
+     select count(*) from ts_report_order where  status = 0
+   </select>
+   
+   <select id="queryOrderTotalByStatuTwo" resultType="int">
+     select count(*) from ts_report_order where  status = 2
+   </select>
+   
+   <update id="updateCheckStatus">
+     update ts_report_order 
+     set 
+     status = #{status} 
+     where 
+     ts_user_id = #{tsUserId} and number = #{number}
+   </update>
+   
+   <select id="queryCheckPageByUN" resultType="int">
+        select count(*) from ts_report_order
+        where 
+        ts_user_id = #{tsUserId} and number = #{number} and status = 0
+   </select>
+   
+   <insert id="save" parameterType="com.framework.entity.TsReportOrderEntity" 
+           useGeneratedKeys="true" keyProperty="id">
+    insert into ts_report_order
+    (
+      `ts_user_id`,
+      `user_id`,
+      `number`,
+      `createtime`,
+      `ordertime`,
+      `status`,
+      `total`,
+      `company_profit`,
+      `profit`,
+      `auditor`,
+      `checktime`
+    ) 
+    values
+    (
+    #{tsUserId},
+    #{userId},
+    #{number},
+    #{createtime},
+    #{ordertime},
+    #{status},
+    #{total},
+    #{companyProfit},
+    #{profit},
+    #{auditor},
+    #{checktime}
+    )
+   </insert>
+   
+   <update id="updateOrder" >
+    update ts_report_order 
+     set 
+       total = #{total},ordertime = #{ordertime}
+     where ts_user_id = #{tsUserId} and number = #{number}
+   </update>
+   
+   <delete id="deleteByUN"> 
+    delete from ts_report_order
+    where ts_user_id = #{tsUserId} and number = #{number}
+   </delete>
+   
+   <select id="queryObjectByUN" resultType="com.framework.entity.TsReportOrderEntity">
+    select * from ts_report_order where 
+    ts_user_id = #{tsUserId} and number = #{number}
+   </select>
+   
+   <update id="update" parameterType="com.framework.entity.TsReportOrderEntity">
+     update ts_report_order 
+     set
+      `ts_user_id` = #{tsUserId},
+      `user_id` = #{userId},
+      `number` = #{number},
+      `createtime` = #{createtime},
+      `ordertime` = #{ordertime},
+      `status` = #{status},
+      `total` = #{total},
+      `company_profit` = #{companyProfit},
+      `profit` = #{profit},
+      `auditor` = #{auditor},
+      `checktime` = #{checktime}
+     where   ts_user_id = #{tsUserId} and number = #{number}
+   </update>
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

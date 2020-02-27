@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<label style="float: left;line-height: 32px;">业务员账号:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 16%;margin-right: 10px;" data-live-search="true" v-model=account>
+	        <option v-for="(y,i) in ywyArr" :value="y">{{ y }}</option>
+		</select>
+		<label style="float: left;line-height: 32px;">年月:</label>
+		<input v-model="time" placeholder="请输入年月2019-12" />
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+		<div style="clear:both;"></div>
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<script src="${rc.contextPath}/js/tscommission/tscommission.js?_${date.systemTime}"></script>
+</body>
+</html>

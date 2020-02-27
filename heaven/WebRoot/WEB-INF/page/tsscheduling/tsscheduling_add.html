@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>业务员账号</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">公司</div>
+		   	<div class="col-sm-10">
+			  <input type="text" class="form-control" v-model="tsUser.company"  disabled />
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label"></div>
+		   	<div class="col-sm-10">
+		      <img alt="" :src="imagesSrc" style="width: 200px;height: 200px;">
+		    </div>
+		</div>
+		
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">姓名</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tsUser.name" disabled />
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">手机号</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tsUser.phone" disabled />
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">业务员账号</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tsUser.account" disabled/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">排班时间</div>
+		   	<div class="col-sm-10">
+		   	<!-- onClick="WdatePicker()" 这个插件还是不要用了，v-model拿不到value-->
+		      <input type="date" class="form-control Wdate" v-model="stScheduling" placeholder="排班时间" />
+		    </div>
+		</div>
+	
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/My97DatePicker/WdatePicker.js?_${date.systemTime}"></script>
+<script src="${rc.contextPath}/js/tsscheduling/tsscheduling_add.js?_${date.systemTime}"></script>
+</body>
+</html>

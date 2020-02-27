@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户流水表</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<!-- <a href="tcflowing_add.html" class="btn btn-success">新增信息</a> -->
+		<label style="float: left;line-height: 32px;">关键字:</label>
+		<input type="text" class="form-control" style="width: 20%;float: left;margin-right: 10px;" v-model="keyword" @keyup.enter="query" placeholder="用户ID(可按回车键查询)">
+		
+		<label style="float: left;line-height: 32px;">类型:</label>
+		<select class="selectpicker show-tick form-control" style="float: left;width: 16%;margin-right: 10px;" data-live-search="true" v-model="type">
+			   <option value="-1" selected="selected">全部</option>
+	           <option value="0"> 礼金 </option>
+	           <option value="1"> 提现 </option>
+	           <option value="2"> 赠送礼物 </option>
+	           <option value="3"> 购买商品 </option>
+	           <option value="4"> 预约服务 </option>
+		</select>
+		
+		<button type="button"  class="btn btn-primary" @click="query"><i class="fa fa-search" aria-hidden="true"> </i> 查 询</button>
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<script src="${rc.contextPath}/js/tcflowing/tcflowing.js?_${date.systemTime}"></script>
+</body>
+</html>

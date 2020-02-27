@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TyOrderCommodityDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TyOrderCommodityEntity">
+		select * from ty_order_commodity where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TyOrderCommodityEntity">
+		select * from ty_order_commodity
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="addressId != null">
+			and address_id = #{addressId}
+		</if>
+		<if test="commodityId != null">
+			and commodity_id = #{commodityId}
+		</if>
+		<if test="commodityImage != null">
+			and commodity_image = #{commodityImage}
+		</if>
+		<if test="commodityTitle != null">
+			and commodity_title = #{commodityTitle}
+		</if>
+		<if test="commodityPrice != null">
+			and commodity_price = #{commodityPrice}
+		</if>
+		<if test="number != null">
+			and number = #{number}
+		</if>
+		<if test="payStatus != null">
+			and pay_status = #{payStatus}
+		</if>
+		<if test="expressTime != null">
+			and express_time = #{expressTime}
+		</if>
+		<if test="expressStatus != null">
+			and express_status = #{expressStatus}
+		</if>
+		<if test="expressName != null">
+			and express_name = #{expressName}
+		</if>
+		<if test="expressNumber != null">
+			and express_number = #{expressNumber}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="addres != null">
+			and addres = #{addres}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+		order by createtime DESC
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TyOrderCommodityEntity">
+		select * from ty_order_commodity
+		where id != -1 
+		<if test="keywod != null">
+			and (id like concat('%', #{keywod}, '%') or number like concat('%', #{keywod}, '%'))
+		</if>
+		<if test="pay_status != null">
+			and pay_status = #{pay_status}
+		</if>
+		<if test="express_status != null">
+			and express_status = #{express_status}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		order by createtime DESC,express_status ASC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ty_order_commodity
+		where id != -1 
+		<if test="keywod != null">
+			and (id like concat('%', #{keywod}, '%') or number like concat('%', #{keywod}, '%'))
+		</if>
+		<if test="pay_status != null">
+			and pay_status = #{pay_status}
+		</if>
+		<if test="express_status != null">
+			and express_status = #{express_status}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if> 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TyOrderCommodityEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into ty_order_commodity
+		(
+			`user_id`, 
+			`address_id`, 
+			`commodity_id`, 
+			`commodity_image`, 
+			`commodity_title`, 
+			`commodity_price`, 
+			`number`, 
+			`pay_status`, 
+			`express_time`, 
+			`express_status`, 
+			`express_name`, 
+			`express_number`, 
+			`name`, 
+			`phone`, 
+			`addres`, 
+			`status`, 
+			`createtime`
+		)
+		values
+		(
+			#{userId}, 
+			#{addressId}, 
+			#{commodityId}, 
+			#{commodityImage}, 
+			#{commodityTitle}, 
+			#{commodityPrice}, 
+			#{number}, 
+			#{payStatus}, 
+			#{expressTime}, 
+			#{expressStatus}, 
+			#{expressName}, 
+			#{expressNumber}, 
+			#{name}, 
+			#{phone}, 
+			#{addres}, 
+			#{status}, 
+			#{createtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TyOrderCommodityEntity">
+		update ty_order_commodity 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="addressId != null">`address_id` = #{addressId}, </if>
+			<if test="commodityId != null">`commodity_id` = #{commodityId}, </if>
+			<if test="commodityImage != null">`commodity_image` = #{commodityImage}, </if>
+			<if test="commodityTitle != null">`commodity_title` = #{commodityTitle}, </if>
+			<if test="commodityPrice != null">`commodity_price` = #{commodityPrice}, </if>
+			<if test="number != null">`number` = #{number}, </if>
+			<if test="payStatus != null">`pay_status` = #{payStatus}, </if>
+			<if test="expressTime != null">`express_time` = #{expressTime}, </if>
+			<if test="expressStatus != null">`express_status` = #{expressStatus}, </if>
+			<if test="expressName != null">`express_name` = #{expressName}, </if>
+			<if test="expressNumber != null">`express_number` = #{expressNumber}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="addres != null">`addres` = #{addres}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ty_order_commodity where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from ty_order_commodity where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

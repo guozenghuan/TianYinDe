@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TsOrderDao">
+   
+   <delete id="deleteByUN">
+     delete from ts_order where ts_user_id = #{tsUserId} and number = #{number}
+   </delete>
+   
+   <insert id="save" parameterType="com.framework.entity.TsOrderEntity" 
+           useGeneratedKeys="true" keyProperty="id">
+     insert into ts_order 
+     (
+      `ts_user_id`,
+      `user_id`,
+      `number`,
+      `name`,
+      `sex`,
+      `age`,
+      `phone`,
+      `ting`,
+      `yuan`,
+      `loan_time`,
+      `sort`,
+      `jtdc`,
+      `chit`,
+      `order_numb`,
+      `total`,
+      `rebate`,
+      `ts_number`,
+      `createtime`
+     )
+     values
+     (
+      #{tsUserId},
+      #{userId},
+      #{number},
+      #{name},
+      #{sex},
+      #{age},
+      #{phone},
+      #{ting},
+      #{yuan},
+      #{loanTime},
+      #{sort},
+      #{jtdc},
+      #{chit},
+      #{orderNumb},
+      #{total},
+      #{rebate},
+      #{tsNumber},
+      #{createtime}
+     )
+   </insert>
+   
+   <update id="update" parameterType="com.framework.entity.TsOrderEntity">
+     update ts_order 
+     set
+      `ts_user_id` = #{tsUserId},
+      `number` = #{number},
+      `user_id` = #{userId},
+      `name` = #{name},
+      `sex` = #{sex},
+      `age` = #{age},
+      `phone` = #{phone},
+      `ting` = #{ting},
+      `yuan` = #{yuan},
+      `loan_time` = #{loanTime},
+      `sort` = #{sort},
+      `jtdc` = #{jtdc},
+      `chit` = #{chit},
+      `order_numb` = #{orderNumb},
+      `total` = #{total},
+      `rebate` = #{rebate},
+      `ts_number` = #{tsNumber},
+      `createtime` = #{createtime}
+     where number = #{number}
+   </update>
+   
+   <select id="queryObjectByUN" resultType="com.framework.entity.TsOrderEntity">
+     select * from ts_order 
+     where 
+     ts_user_id = #{tsUserId} and number = #{number}
+   </select>
+   
+   <select id="queryPageByUN" resultType="int">
+     select count(*) from ts_order 
+     where  number = #{number}
+   </select>
+  
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

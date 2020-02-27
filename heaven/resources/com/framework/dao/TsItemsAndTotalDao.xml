@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TsItemsAndTotalDao">
+
+   <delete id="deleteByUN">
+     delete from ts_items_and_total where ts_user_id = #{tsUserId} and number = #{number}
+   </delete>
+   
+      <insert id="save" parameterType="com.framework.entity.TsItemsAndTotalEntity" 
+           useGeneratedKeys="true" keyProperty="id">
+     insert into ts_items_and_total 
+     (
+      `ts_user_id`,
+      `number`,
+      `total_price`,
+      `cost_total`,
+      `cash_total`,
+      `comm`,
+      `comml`,
+      `tcx`,
+      `cost_x`,
+      `tcj`,
+      `cost_j`,
+      `cash_x_j`,
+      `mly`,
+      `mlly`,
+      `jly`,
+      `jll`,
+      `hjrytc`,
+      `check`,
+      `cost_all`,
+      `company_income`,
+      `audit`,
+      `finance`,
+      `createtime`,
+      `b`,
+      `commission`,
+      `ad_profit`,
+      `sal_commission`
+     )
+     values
+     (
+      #{tsUserId},
+      #{number},
+      #{totalPrice},
+      #{costTotal},
+      #{cashTotal},
+      #{comm},
+      #{comml},
+      #{tcx},
+      #{costX},
+      #{tcj},
+      #{costJ},
+      #{cashXJ},
+      #{mly},
+      #{mlly},
+      #{jly},
+      #{jll},
+      #{hjrytc},
+      #{check},
+      #{costAll},
+      #{companyIncome},
+      #{audit},
+      #{finance},
+      #{createtime},
+      #{b},
+      #{commission},
+      #{adProfit},
+      #{salCommission}
+     )
+   </insert>
+   
+   <update id="update" parameterType="com.framework.entity.TsItemsAndTotalEntity">
+     update ts_items_and_total
+       set
+       audit = #{audit},
+       cost_j = #{costJ},
+       finance = #{finance},
+       sal_commission = #{salCommission}
+     where id = #{id}
+   </update>
+   
+   <select id="queryObjectByUN" resultType="com.framework.entity.TsItemsAndTotalEntity">
+     select * from ts_items_and_total
+     where
+     ts_user_id = #{tsUserId} and number = #{number}
+   </select>
+   
+   
+   
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

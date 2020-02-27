@@ -1,0 +1,270 @@
+@charset "UTF-8";
+
+/* flex */
+.flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.flex-v {
+	-webkit-box-orient: vertical;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+.flex-1 {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+.flex-align-center {
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.flex-pack-center {
+	-webkit-box-pack: center;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: center;
+	justify-content: flex-start;
+}
+
+.flex-pack-justify {
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+
+.flex-box {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-moz-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
+	-o-box-orient: horizontal;
+	box-orient: horizontal;
+}
+
+/*遮罩*/
+.mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 999;
+}
+
+/* 错误提示弹层 */
+.c-float-modePop {
+	padding-top: .25rem;
+	text-align: center;
+	background-color: #fff;
+	border-radius: .3rem;
+	overflow: hidden;
+}
+
+.c-float-modePop .warnMsg {
+	/* padding: 0.2rem 0 0.1rem 0; */
+	color: #fff;
+}
+
+.c-float-modePop .doBtn {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+
+.c-float-modePop button {
+	padding: 6px 9px 6px 9px;
+	color: #949494;
+	border: 0;
+}
+
+.c-float-shade {
+	width: 100%;
+	display: block;
+	position: absolute;
+	z-index: 99;
+	background-color: #000;
+	opacity: .5;
+	top: 0;
+	left: 0
+}
+
+.c-float-shade.hide {
+	display: none
+}
+
+.c-float-popWrap {
+	width: 85%;
+	z-index: 9999;
+	position: fixed;
+}
+
+.c-float-popWrap .c-float-modePop .warnMsg {
+	font-size: 0.32rem;
+	color: #333;
+	border-radius: .3rem .3rem 0 0;
+}
+
+.c-float-popWrap .c-float-modePop .content {
+	position: relative;
+	padding: 0.1rem .25rem .25rem 0.25rem;
+	font-size: 0.28rem;
+	color: #333;
+	word-wrap: break-word;
+	word-break: break-all;
+	text-align: center;
+	min-height: auto;
+}
+
+.c-float-popWrap .c-float-modePop .content input.text,
+.c-float-popWrap .c-float-modePop .content textarea.text {
+	width: 90%;
+	padding: 2% 0;
+	margin: 1% 3%;
+	border-bottom: #ccc 1px solid;
+	box-sizing: border-box;
+	font-size: .8rem;
+}
+
+.c-float-popWrap .c-float-modePop .content textarea.text {
+	line-height: .9rem;
+}
+
+.c-float-popWrap .c-float-modePop .doBtn {
+	width: 100%;
+}
+
+.c-float-popWrap .c-float-modePop .doBtn:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	border-top: 1px solid #D5D5D6;
+	color: #D5D5D6;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: scaleY(0.5);
+	transform: scaleY(0.5);
+}
+
+.c-float-popWrap .c-float-modePop button {
+	background-color: #FAFAFC;
+	width: 50%;
+	height: .78rem;
+	line-height: .78rem;
+	color:
+		#444;
+	font-size: 0.3rem;
+	border: 0;
+	padding: 0;
+}
+
+.c-float-popWrap .c-float-modePop button.ok {
+	background: #24aa7d;
+	color: #fff;
+	border-radius: 0 0 .3rem 0;
+}
+
+.c-float-popWrap .c-float-modePop button.cancel {
+	position: relative;
+	border-radius: 0 0 0 .3rem;
+}
+
+.c-float-popWrap .c-float-modePop button.cancel:after {
+	content: " ";
+	position: absolute;
+	right: -1px;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	border-left: 1px solid #D5D5D6;
+	color: #D5D5D6;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: scaleX(0.5);
+	transform: scaleX(0.5);
+}
+
+.c-float-popWrap.hide {
+	display: none;
+	-webkit-box-shadow: none
+}
+
+.c-float-popWrap.show {
+	display: block;
+}
+
+.c-float-popWrap.msgMode .c-float-modePop .content,
+.c-float-popWrap.msgMode .c-float-modePop .doBtn {
+	display: none
+}
+
+.c-float-popWrap.alertMode .c-float-modePop .doBtn .cancel {
+	display: none
+}
+
+.c-float-popWrap.confirmMode .c-float-modePop .content,
+.c-float-popWrap.confirmMode .c-float-modePop .doBtn {
+	display: block
+}
+
+.c-float-modePop .content p {
+	margin: 5px 0;
+}
+
+.confirm_input {
+	border: 1px solid #D5D5D6 !important;
+	padding: 0.15rem;
+	width: 65%;
+	border-radius: 2px !important;
+}
+
+.weui_mask_transparent {
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.cx_mask_transparent {
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.web_toast {
+	position: fixed;
+	margin: 0 10px;
+	z-index: 9999;
+	display: block;
+	padding: 10px;
+	color: #FFF;
+	background: rgba(0, 0, 0, 0.7);
+	font-size: 0.25rem;
+	text-align: center;
+	border-radius: 4px;
+}

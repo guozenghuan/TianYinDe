@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理员列表</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		#if($shiro.hasPermission("sys:user:save"))
+		<a class="btn btn-default" href="user_add.html">新增</a>
+		#end
+		#if($shiro.hasPermission("sys:user:update"))
+		<button type="button"  class="btn btn-default" @click="update">修改</button>
+		#end
+		#if($shiro.hasPermission("sys:user:delete"))
+		<button type="button" class="btn btn-default" @click="del">删除</button>
+		#end
+		
+		<span>关联用户ID-有新的服务订单通过微信公众号提醒(用户ID在用户管理菜单中的用户信息可查看)</span>
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<script src="${rc.contextPath}/js/sys/user.js?_${date.systemTime}"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.SysCategoryDao">
+
+	<select id="queryObject" resultType="com.framework.entity.SysCategoryEntity">
+		select * from sys_category where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.SysCategoryEntity">
+		select * from sys_category
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="keywords != null">
+			and keywords = #{keywords}
+		</if>
+		<if test="desc != null">
+			and desc = #{desc}
+		</if>
+		<if test="pid != null">
+			and pid = #{pid}
+		</if>
+		<if test="iconUrl != null">
+			and icon_url = #{iconUrl}
+		</if>
+		<if test="picUrl != null">
+			and pic_url = #{picUrl}
+		</if>
+		<if test="level != null">
+			and level = #{level}
+		</if>
+		<if test="sortOrder != null">
+			and sort_order = #{sortOrder}
+		</if>
+		<if test="addTime != null">
+			and add_time = #{addTime}
+		</if>
+		<if test="updateTime != null">
+			and update_time = #{updateTime}
+		</if>
+		<if test="deleted != null">
+			and deleted = #{deleted}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.SysCategoryEntity">
+		select * from sys_category 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from sys_category 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.SysCategoryEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_category
+		(
+			`name`, 
+			`desc`, 
+			`sort_order`,
+			add_time 
+		)
+		values
+		(
+			#{name}, 
+			#{desc}, 
+			#{sortOrder},
+			#{addTime}
+		)
+	</insert>
+	<insert id="saveImg" parameterType="com.framework.entity.SysCategoryEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_category
+		(
+			`name`, 
+			`desc`, 
+			`sort_order`,
+			add_time 
+		)
+		values
+		(
+			#{name}, 
+			#{desc}, 
+			#{sortOrder},
+			#{addTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.SysCategoryEntity">
+		update sys_category 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="keywords != null">`keywords` = #{keywords}, </if>
+			<if test="desc != null">`desc` = #{desc}, </if>
+			<if test="pid != null">`pid` = #{pid}, </if>
+			<if test="iconUrl != null">`icon_url` = #{iconUrl}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="sortOrder != null">`sort_order` = #{sortOrder}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from sys_category where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from sys_category where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

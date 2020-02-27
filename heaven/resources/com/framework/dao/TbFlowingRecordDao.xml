@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TbFlowingRecordDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TbFlowingRecordEntity">
+		select * from tb_flowing_record where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TbFlowingRecordEntity">
+		select * from tb_flowing_record
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="typeName != null">
+			and type_name = #{typeName}
+		</if>
+		<if test="symbol != null">
+			and symbol = #{symbol}
+		</if>
+		<if test="money != null">
+			and money = #{money}
+		</if>
+		<if test="note != null">
+			and note = #{note}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TbFlowingRecordEntity">
+		select * from tb_flowing_record 
+		where id != -1
+		<if test="keywod != null">
+			and user_id like concat('%', #{keywod}, '%')
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="userid != null">
+			and user_id = #{userid}
+		</if>
+		order by createtime DESC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_flowing_record 
+		where id != -1
+		<if test="keywod != null">
+			and id like concat('%', #{keywod}, '%')
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="userid != null">
+			and user_id = #{userid}
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TbFlowingRecordEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_flowing_record
+		(
+			`user_id`, 
+			`type`, 
+			`type_name`, 
+			`symbol`, 
+			`money`, 
+			`note`, 
+			`createtime`
+		)
+		values
+		(
+			#{userId}, 
+			#{type}, 
+			#{typeName}, 
+			#{symbol}, 
+			#{money}, 
+			#{note}, 
+			#{createtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TbFlowingRecordEntity">
+		update tb_flowing_record 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="typeName != null">`type_name` = #{typeName}, </if>
+			<if test="symbol != null">`symbol` = #{symbol}, </if>
+			<if test="money != null">`money` = #{money}, </if>
+			<if test="note != null">`note` = #{note}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_flowing_record where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_flowing_record where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+#parse("sys/header.html")
+<style>
+table{
+	width:100%;
+	border:0;
+	margin:0;
+	padding:0;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+}
+td{
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	min-width: 50px;
+	text-align: center;
+}
+.custom-table{
+	width: 100%;
+}
+.footer{
+	margin-top: 40px;
+}
+button{
+	border:0;
+	margin:0;
+	padding: 10px 20px;
+	color:#fff;
+}
+.pass-btn{
+	background-color: #5cb85c
+}
+.faild-btn{
+	background-color:#e73333;
+}
+.prev-btn{
+	background-color: blue;
+}
+</style>
+</head>
+<body>
+<div id="rrapp">
+    <table class="custom-table" id="top-table">
+    	<tr>
+    		<td>单号</td>
+    		<td id="number"></td>
+    		<td colspan="8">成交底单</td>
+    		<td>接体地址</td>
+    		<td id="jtdc"></td>
+    	</tr>
+    	<tr>
+    		<td>姓名</td>
+    		<td id="name"></td>
+    		<td>性别</td>
+    		<td id="sex"></td>
+    		<td>年龄</td>
+    		<td id="age"></td>
+    		<td>电话</td>
+    		<td id="phone" colspan="3"></td>
+    		<td>包单</td>
+    		<td id="chit"></td>
+    	</tr>
+    	<tr>
+    		<td>厅</td>
+    		<td id="ting"></td>
+    		<td>办厂</td>
+    		<td id="yuan" colspan="3"></td>
+    		<td>结款时间</td>
+    		<td id="loanTime"></td>
+    		<td>类别</td>
+    		<td id="sort"></td>
+    		<td>业务编号</td>
+    		<td id="orderNumb"></td>
+    	</tr>
+    </table>
+    <table id="jqGrid"></table>
+    <table class="custom-table" id="button-table">
+    	<tr>
+    		<td>总计</td>
+    		<td>包单总金</td>
+    		<td id="totalPrice" colspan="2"></td>
+    		<td>小计</td>
+    		<td id="costTotal"></td>
+    		<td id="cashTotal" colspan="2"></td>
+    		<td>佣金</td>
+    		<td id="comm"></td>
+    		<td>佣金率</td>
+    		<td id="comml">0.00%</td>
+    	</tr>
+    	<tr>
+    		<td colspan="2">信息源</td>
+    		<td id="xxy"></td>
+    		<td>提成</td>
+    		<td>30%</td>
+    		<td id="costX"></td>
+    		<td rowspan="2" width="20">合计</td>
+    		<td rowspan="2" id="cashXJ"></td>
+    		<td>毛利润</td>
+    		<td id="mly"></td>
+    		<td>毛利润率</td>
+    		<td id="mlly">0.00%</td>
+    	</tr>
+    	<tr>
+    		<td colspan="2">经办人</td>
+    		<td id="jbr"></td>
+    		<td>提成</td>
+    		<td>24%</td>
+    		<td id="costJ"></td>
+    		<td>净利润</td>
+    		<td id="jly"></td>
+    		<td>净利润率</td>
+    		<td id="jll">0.00%</td>
+    	</tr>
+    	<tr>
+    		<td colspan="2">后勤人员提成</td>
+    		<td id="hjrytc" colspan="2"></td>
+    		<td colspan="2">对账实收</td>
+    		<td id="check" colspan="2"></td>
+    		<td>成本</td>
+    		<td id="costAll"></td>
+    		<td>公司收入</td>
+    		<td id="companyIncome"></td>
+    	</tr>
+    	<tr>
+    		<td colspan="2">审核人员</td>
+    		<td id="audit" colspan="2"></td>
+    		<td>审核状态</td>
+    		<td id="finance" colspan="4"></td>
+    		<td>制单日期</td>
+    		<td id="createtime" colspan="2"></td>
+    	</tr>
+    	<tr>
+    		<td>
+    		提成基率
+    		</td>
+    		<td>
+    			<select id="b">
+    				<option selected="selected" value="15">15%</option>
+    				<option value="18">18%</option>
+    				<option value="21">21%</option>
+    				<option value="24">24%</option>
+    				<option value="27">27%</option>
+    				<option value="30">30%</option>
+    			</select>
+    		</td>
+    		<td>
+    		提成利率
+    		</td>
+    		<td>
+    			<select id="commission">
+    				<option selected="selected">A</option>
+    				<option>AA</option>
+    				<option>AAA</option>
+    				<option>AAAA</option>
+    				<option>AAAAA</option>
+    			</select>
+    		</td>
+    		<td>
+    		行政利润
+    		</td>
+    		<td id="adProfit">
+    			<!-- <input type="number" id="adProfit" /> -->
+    		</td>
+    		<td>
+    		业务员提成
+    		</td>
+    		<td id="salCommission">
+    			<!-- <input type="number" id="salCommission" /> -->
+    		</td>
+    	</tr>
+    </table>
+    <div class="footer">
+    	<button class="prev-btn" onclick="check(2)">预审核</button>
+	    <button class="pass-btn" onclick="check(0)">审核通过</button>
+	    <button class="faild-btn" onclick="check(1)">审核不通过</button>
+	    <button class="back-btn" onclick="goback()">返回</button>
+    </div>
+</div>
+
+<script src="${rc.contextPath}/js/tsReportOrder/tsReportOrder_audit.js?_${date.systemTime}"></script>
+</body>
+</html>

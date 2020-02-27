@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商品订单</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">用户id</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.userId" placeholder="用户id"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">商品id</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.commodityId" placeholder="商品id"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">商品标图</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.commodityImage" placeholder="商品标图"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">商品名称</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.commodityTitle" placeholder="商品名称"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">商品价格</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.commodityPrice" placeholder="商品价格"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">单号</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.number" placeholder="单号"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">支付状态：0=待支付，1=已支付</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.payStatus" placeholder="支付状态：0=待支付，1=已支付"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">发货时间</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.expressTime" placeholder="发货时间"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">发货状态：0=代发货，1=已发货</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.expressStatus" placeholder="发货状态：0=代发货，1=已发货"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">快递名称</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.expressName" placeholder="快递名称"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">快递单号</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.expressNumber" placeholder="快递单号"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">订单状态：0，未完成，1=已完成</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyOrderCommodity.status" placeholder="订单状态：0，未完成，1=已完成"/>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/tyordercommodity/tyordercommodity_add.js?_${date.systemTime}"></script>
+</body>
+</html>

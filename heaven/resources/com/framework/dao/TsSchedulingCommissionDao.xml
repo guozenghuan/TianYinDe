@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TsSchedulingCommissionDao">
+  
+  <select id="queryTsAccount" resultType="string">
+    select DISTINCT account from ts_scheduling_commission where id != -1
+  </select>
+  
+  <select id="queryTotal" resultType="int">
+   select count(*) from  ts_scheduling_commission where id != -1
+   <if test="account !=null">
+     and account = #{account}
+   </if>
+   <if test="time !=null">
+     and createtime = #{time}
+   </if>
+  </select>
+  
+  <select id="queryListByMap" resultType="com.framework.entity.TsSchedulingCommissionEntity">
+   select * from ts_scheduling_commission where id != -1
+   <if test="account != null">
+     and account = #{account}
+   </if>
+   <if test="time != null">
+     and createtime = #{time}
+   </if> 
+   order by commission_total DESC
+   limit #{page},#{limit}
+  </select>
+  
+  <delete id="deleteByUN">
+   delete from ts_scheduling_commission where id != -1
+   <if test="tsUserId != null">
+     and ts_user_id = #{tsUserId}
+   </if>
+   <if test="number != null">
+     and number = #{number}
+   </if>
+  </delete>
+  
+  <insert id="save" parameterType="com.framework.entity.TsSchedulingCommissionEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into ts_scheduling_commission
+		(
+		`ts_user_id`,
+		`company`,
+		`name`,
+		`phone`,
+		`account`,
+		`number`,
+		`commission`,
+		`commission_total`,
+		`createtime`
+		)
+		values
+		(
+		#{tsUserId},
+		#{company},
+		#{name},
+		#{phone},
+		#{account},
+		#{number},
+		#{commission},
+		#{commissionTotal},
+		#{createtime}
+		)
+	</insert>
+	
+	<select id="queryTotalByUN" resultType="com.framework.entity.TsSchedulingCommissionEntity">
+	 select * from ts_scheduling_commission
+	 where ts_user_id = #{tsUserId} and number = #{number}
+	</select>
+	
+	<update id="update" parameterType="com.framework.entity.TsSchedulingCommissionEntity">
+	update ts_scheduling_commission
+	set
+	commission = #{commission},
+	commission_total = #{commissionTotal},
+	createtime = #{createtime}
+	where number= #{number} and ts_user_id = #{tsUserId}
+	</update>
+  
+    <select id="queryMathSUMByUN" resultType="BigDecimal">
+      select SUM(commission) from ts_scheduling_commission
+      where ts_user_id = #{tsUserId} and createtime = #{createtime}
+    </select>
+    
+    <select id="queryObjectByKey" resultType="com.framework.entity.TsSchedulingCommissionEntity">
+    select * from ts_scheduling_commission
+    where id != -1
+    <if test="account != null">
+       and account = #{account}
+    </if>
+    <if test="tsUserId != null">
+      ts_user_id = #{tsUserId}
+    </if>
+    <if test="number != null">
+      number = #{number}
+    </if>
+    
+    
+    </select>
+
+    <update id="updateByNumber" parameterType="com.framework.entity.TsSchedulingCommissionEntity">
+    update ts_scheduling_commission
+	set
+	commission = 0.00,
+	commission_total = 0.00
+	where number= #{number}
+    </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

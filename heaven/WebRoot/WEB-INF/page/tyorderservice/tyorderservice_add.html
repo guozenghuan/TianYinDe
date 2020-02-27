@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>服务订单</title>
+#parse("sys/header.html")
+
+<!-- 列表信息 -->
+<link rel="stylesheet" type="text/css" href="../../../statics/leaderboard/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="../../../statics/leaderboard/css/jq22-demo.css">
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="../../../statics/leaderboard/css/style.css">
+
+</head>
+<body>
+<div id="rrapp" v-cloak>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">单号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="tyOrderService.number" placeholder="单号" readonly="readonly"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">服务费</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="tyOrderService.servicePrice" placeholder="服务费" readonly="readonly"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">联系人</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="tyOrderService.name" placeholder="联系人" readonly="readonly"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">电话</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="tyOrderService.phone" placeholder="电话" readonly="readonly"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">评分</div>
+			   	<div class="col-sm-10">
+			      <i v-for="size in tyOrderService.score" class="fa fa-star" style="color: #f4940d;font-size: 18px;padding-top: 7px;"></i>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">评价</div>
+			   	<div class="col-sm-10">
+			      <textarea rows="" cols="" placeholder="评价" class="form-control" v-model="tyOrderService.evaluate" style="width: 38%; height: 200px;" readonly="readonly"></textarea>
+			    </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<!-- <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/> -->
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+			</div>
+		</form>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">{{title2}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">订单服务总价</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="tyOrderService.price" placeholder="订单服务总价"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">价格备注</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="tyOrderService.note" placeholder="价格备注"/>
+			    </div>
+			</div>
+			
+			<!-- 服务信息 -->
+			<div class="form-group">
+				<div class="col-sm-10">
+					<div>
+						<div class="leaderboard">
+						  <ol>
+						    <li v-for="sc in this.fuwu">
+					    		<mark>{{sc.text}}</mark>
+						        <mark style="padding: 6px 10px 18px 50px;">
+								    <a class="btn btn-danger" style="float: right;background-color: #fb5853;" :id="'delete_'+sc.sort" onclick="deleteFw(this.id);"><i class="fa fa-trash"></i></a>
+						  	    </mark>
+						  	    <small style="margin-right: 80px;font-weight: bolder;">￥{{sc.name}}</small>
+						    </li>
+						  </ol>
+						  
+						</div>
+					</div>
+					<div style="text-align: center;padding-top: 10px;">
+						<a class="btn btn-success" style="width: 30%;" @click="getServiceInfo">添加服务信息 <i class="fa fa-plus-square"></i></a>
+					</div>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="保存服务信息"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+			</div>
+			
+		</form>
+	</div>
+	
+	<!-- 选择服务信息 -->
+	<div id="topUpTree_service" style="display: none;padding:10px;">
+		<div class="jq22-container" v-for="(fws,index) in this.service">
+			<div class="leaderboard">
+			  <h1 style="font-weight: bolder;">
+			  	 {{fws.text}}
+			  	<a class="btn btn-danger" style="float: right;background-color: rgb(71, 182, 50);border-color: rgb(55, 61, 74);" name="quanxuan" :id="'serviceAll_'+fws.id" onclick="selectFwAll(this.id);"> 全选 </a>
+			  </h1>
+			  	
+			  <ol>
+			    <li v-for="sc in fws.childrenFw" v-if="sc.id != -1" :title="sc.type">
+		    		<mark>{{sc.text}}</mark>
+			        <mark style="padding: 6px 10px 18px 50px;">
+					    <a class="btn btn-danger" style="float: right;background-color: #fb5853;" :id="'service_'+sc.id" name="xuanzhong" onclick="selectFw(this.id);"><i class="fa fa-check"></i></a>
+			  	    </mark>
+			  	    <small style="margin-right: 250px;font-weight: bolder;">￥{{sc.name}}</small>
+			    </li>
+			  </ol>
+			  
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script src="${rc.contextPath}/js/tyorderservice/tyorderservice_add.js?_${date.systemTime}"></script>
+</body>
+</html>

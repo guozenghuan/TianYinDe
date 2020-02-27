@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TyGiftDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TyGiftEntity">
+		select * from ty_gift where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TyGiftEntity">
+		select * from ty_gift
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="giftCode != null">
+			and gift_code = #{giftCode}
+		</if>
+		<if test="giftName != null">
+			and gift_name = #{giftName}
+		</if>
+		<if test="price != null">
+			and price = #{price}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TyGiftEntity">
+		select * from ty_gift 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ty_gift 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TyGiftEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into ty_gift
+		(
+			`gift_code`, 
+			`gift_name`, 
+			`price`
+		)
+		values
+		(
+			#{giftCode}, 
+			#{giftName}, 
+			#{price}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TyGiftEntity">
+		update ty_gift 
+		<set>
+			<if test="giftCode != null">`gift_code` = #{giftCode}, </if>
+			<if test="giftName != null">`gift_name` = #{giftName}, </if>
+			<if test="price != null">`price` = #{price}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ty_gift where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from ty_gift where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

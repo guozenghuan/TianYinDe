@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TbAddressDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TbAddressEntity">
+		select * from tb_address where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TbAddressEntity">
+		select * from tb_address
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="addres != null">
+			and addres = #{addres}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TbAddressEntity">
+		select * from tb_address 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_address 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TbAddressEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_address
+		(
+			`user_id`, 
+			`name`, 
+			`phone`, 
+			`addres`, 
+			`createtime`
+		)
+		values
+		(
+			#{userId}, 
+			#{name}, 
+			#{phone}, 
+			#{addres}, 
+			#{createtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TbAddressEntity">
+		update tb_address 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="addres != null">`addres` = #{addres}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_address where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_address where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

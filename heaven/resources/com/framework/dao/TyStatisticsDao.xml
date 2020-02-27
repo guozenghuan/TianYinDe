@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.TyStatisticsDao">
+
+	<select id="queryObject" resultType="com.framework.entity.TyStatisticsEntity">
+		select * from ty_statistics where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.TyStatisticsEntity">
+		select * from ty_statistics
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="todayUser != null">
+			and today_user = #{todayUser}
+		</if>
+		<if test="allUser != null">
+			and all_user = #{allUser}
+		</if>
+		<if test="todayCommodity != null">
+			and today_commodity = #{todayCommodity}
+		</if>
+		<if test="allCommodity != null">
+			and all_commodity = #{allCommodity}
+		</if>
+		<if test="todayService != null">
+			and today_service = #{todayService}
+		</if>
+		<if test="allService != null">
+			and all_service = #{allService}
+		</if>
+		<if test="todayServiceMoney != null">
+			and today_service_money = #{todayServiceMoney}
+		</if>
+		<if test="allServiceMoney != null">
+			and all_service_money = #{allServiceMoney}
+		</if>
+		<if test="todayServicePrice != null">
+			and today_service_price = #{todayServicePrice}
+		</if>
+		<if test="allServicePrice != null">
+			and all_service_price = #{allServicePrice}
+		</if>
+		<if test="todayGift != null">
+			and today_gift = #{todayGift}
+		</if>
+		<if test="allGift != null">
+			and all_gift = #{allGift}
+		</if>
+		<if test="todayCash != null">
+			and today_cash = #{todayCash}
+		</if>
+		<if test="allCash != null">
+			and all_cash = #{allCash}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.TyStatisticsEntity">
+		select * from ty_statistics 
+		order by createtime DESC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ty_statistics 
+	</select>
+	
+	<!-- 获取顶部数据 -->
+	<select id="queryByNow" resultType="com.framework.entity.TyStatisticsEntity">
+		select count(*) allUser,
+		(select count(*) from tc_user where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d'))) todayUser,
+		(select count(*) from ty_order_commodity where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d')) and pay_status=1) todayCommodity,
+		(select count(*) from ty_order_commodity where pay_status=1) allCommodity,
+		(select count(*) from ty_order_service where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d')) and pay_status=1) todayService,
+		(select count(*) from ty_order_service where pay_status=1) allService,
+		(select sum(service_price) from ty_order_service where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d')) and service_price=1) todayServiceMoney,
+		(select sum(service_price) from ty_order_service where service_price=1) allServiceMoney,
+		(select sum(price) from ty_order_service where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d')) and (price_status=1 or price_status=2)) todayServicePrice,
+		(select sum(price) from ty_order_service where price_status=1 or price_status=2) allServicePrice,
+		(select sum(price) from ty_invitation_gift where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d')) and status=0) todayGift,
+		(select sum(price) from ty_invitation_gift where status=0) allGift,
+		(select sum(money) from ty_invitation_cashmoney where DATE_FORMAT(createtime,'%Y-%m-%d')=(select DATE_FORMAT(now(),'%Y-%m-%d')) and status=0) todayCash,
+		(select sum(money) from ty_invitation_cashmoney where status=0) allCash,
+		(select COALESCE(SUM(count*(cost - unit)),0) from ts_item where unit != 0 and cost != 0 and cash = 0) totalAProfit
+		from tc_user
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.TyStatisticsEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into ty_statistics
+		(
+			`today_user`, 
+			`all_user`, 
+			`today_commodity`, 
+			`all_commodity`, 
+			`today_service`, 
+			`all_service`, 
+			`today_service_money`, 
+			`all_service_money`, 
+			`today_service_price`, 
+			`all_service_price`, 
+			`today_gift`, 
+			`all_gift`, 
+			`today_cash`, 
+			`all_cash`,
+			`total_a_profit`,
+			`createtime`
+		)
+		values
+		(
+			#{todayUser}, 
+			#{allUser}, 
+			#{todayCommodity}, 
+			#{allCommodity}, 
+			#{todayService}, 
+			#{allService}, 
+			#{todayServiceMoney}, 
+			#{allServiceMoney}, 
+			#{todayServicePrice}, 
+			#{allServicePrice}, 
+			#{todayGift}, 
+			#{allGift}, 
+			#{todayCash}, 
+			#{allCash},
+			#{totalAProfit},
+			#{createtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.TyStatisticsEntity">
+		update ty_statistics 
+		<set>
+			<if test="todayUser != null">`today_user` = #{todayUser}, </if>
+			<if test="allUser != null">`all_user` = #{allUser}, </if>
+			<if test="todayCommodity != null">`today_commodity` = #{todayCommodity}, </if>
+			<if test="allCommodity != null">`all_commodity` = #{allCommodity}, </if>
+			<if test="todayService != null">`today_service` = #{todayService}, </if>
+			<if test="allService != null">`all_service` = #{allService}, </if>
+			<if test="todayServiceMoney != null">`today_service_money` = #{todayServiceMoney}, </if>
+			<if test="allServiceMoney != null">`all_service_money` = #{allServiceMoney}, </if>
+			<if test="todayServicePrice != null">`today_service_price` = #{todayServicePrice}, </if>
+			<if test="allServicePrice != null">`all_service_price` = #{allServicePrice}, </if>
+			<if test="todayGift != null">`today_gift` = #{todayGift}, </if>
+			<if test="allGift != null">`all_gift` = #{allGift}, </if>
+			<if test="todayCash != null">`today_cash` = #{todayCash}, </if>
+			<if test="allCash != null">`all_cash` = #{allCash}, </if>
+			<if test="totalAProfit != null">`total_a_profit` = #{totalAProfit}, </if>
+			<if test="createtime != null">`createtime` = #{createtime} </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ty_statistics where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from ty_statistics where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

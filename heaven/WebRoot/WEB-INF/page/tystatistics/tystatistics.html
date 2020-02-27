@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>平台信息统计</title>
+#parse("sys/header.html")
+
+<style type="text/css">
+.full_div {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.block {
+    border: 2px solid #94ace2;
+    cursor: pointer;
+}
+.block:hover {
+    border: 2px solid #004eff;
+}
+.block:active {
+	border: 2px solid #d20000;
+}
+.line_height_title {
+    line-height: 45px;
+    padding-left: 10px;
+    height: 45px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+.full_div {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.line_height_body {
+    height: 68px;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+}
+.successColor {
+    color: #009688;
+}
+.middleText {
+    position: absolute;
+    font-weight: bold;
+    top: 50%;
+    left: 0;
+    right: 0;
+    word-wrap: break-word;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: transformY(-50%);
+    -ms-transform: transformY(-50%);
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-bottom: 20px;
+}
+.col-sm-2 {
+    width: 12%;
+}
+</style>
+
+</head>
+<body>
+<div id="rrapp">
+	
+	<div class="row">
+	
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">用户总数量</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allUser">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日新增用户</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayUser">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日商品下单</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayCommodity">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计商品单量</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allCommodity">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日服务下单</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayService">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计服务下单</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allService">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日预约服务费</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayServiceMoney">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计预约服务费</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allServiceMoney">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日服务套餐费</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayServicePrice">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计服务套餐费</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allServicePrice">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日赠送平台礼物</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayGift">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计赠送平台礼物</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allGift">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">今日收到奠金</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.todayCash">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计收到奠金</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.allCash">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+			<div class="full_div block">
+				<div class="line_height_title">累计行政利润</div>
+				<div class="full_div line_height_body">
+					<span class="middleText successColor"><span v-html="TyStatistics.totalAProfit">加载中.</span></span>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<script src="${rc.contextPath}/js/tystatistics/tystatistics.js?_${date.systemTime}"></script>
+</body>
+</html>

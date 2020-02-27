@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>模板信息表</title> 
+<link rel="stylesheet" href="../../../statics/modulshow/css/styles.css" />
+#parse("sys/header.html")
+</head>
+<body>
+	<div id="rrapp" v-cloak>
+		<div id="slelectmodulS" class="panel panel-default" style="display: none;background-color: #f5f5f5;">
+			<div class="demo-wrapper">
+			  <ul class="portfolio-items">
+			  	<!-- 模板1 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_01');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_01" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_01.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板2 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_02');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_02" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_02.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板3 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_03');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_03" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_03.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板4 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_04');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_04" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_04.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板5 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_05');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_05" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_05.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板6 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_06');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_06" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_06.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板7 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_07');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_07" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_07.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板8 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_08');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_08" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_08.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板9 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_09');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_09" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_09.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板10 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_10');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_10" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_10.html?seetingBtn=false"></iframe>
+			    </li>
+			    <!-- 模板11 -->
+			    <li class="item">
+			      <img onclick="selectModuls('modul_11');" style="opacity: 0;width: 300px;height: 508px;position: fixed;z-index: 10000;cursor: pointer;" src="../../../statics/modul/image/opacity.png">
+			      <iframe id="modul_11" scrolling="yes" frameborder="0" style="width: 300px;height: 508px;"
+			       src="../../../statics/modul/modul_11.html?seetingBtn=false"></iframe>
+			    </li>
+			  </ul>
+			  <input type="button" class="btn btn-warning" @click="loseModuls" value="关闭模板" />
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">音乐</div>
+					<div class="col-sm-10">
+						<select class="selectpicker show-tick form-control" data-live-search="true" v-model="modul.musicId">
+				           <option v-for="modulMusic in this.modulMusicList" v-bind:value="modulMusic.id" selected="selected">{{ modulMusic.name }}</option>
+					    </select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">模板状态</div>
+					<div class="col-sm-10">
+						<select class="selectpicker show-tick form-control" data-live-search="true" v-model="modul.status">
+				           <option value="show" selected="selected">显示</option>
+				           <option value="hide">隐藏</option>
+					  	</select>
+					</div>
+				</div>
+				<div class="form-group" id="saveBtnStatus">
+					<div class="col-sm-2 control-label"></div>
+					<input id="saveUpdateBtn" type="button" class="btn btn-primary" @click="saveOrUpdate"
+						value="保存后添加模板" /> &nbsp;&nbsp;<input type="button"
+						class="btn btn-warning" @click="back" value="返回" />
+				</div>
+			</form> 
+		</div>
+		
+		<div id="addModulWindows" class="panel panel-default">
+			<a class="btn btn-success" onclick="addModulBtn();">添加模板</a>
+			&nbsp;&nbsp;<input id="backBtn" type="button" class="btn btn-warning" @click="back" value="返回" />
+		</div>
+		
+	</div>
+
+	<script src="${rc.contextPath}/js/modul/modul_add.js?_${date.systemTime}"></script>
+	<script src="../../../statics/modulshow/js/modernizr-1.5.min.js"></script> 
+	<script src="../../../statics/modulshow/js/jquery.mousewheel.js"></script> 
+	<script src="../../../statics/modulshow/js/scripts.js"></script>
+</body>
+</html>

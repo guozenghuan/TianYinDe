@@ -1,0 +1,807 @@
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, img, dl, dt, dd, table, th, td, blockquote, fieldset, div, strong, label, em{margin:0; padding:0; border:0;}
+ul, ol, li{list-style:none;}
+input, button{margin:0; font-size:12px; vertical-align:middle;}
+body,select{font:14px/1.5 "Microsoft Yahei",SimHei,helvetica, arial,  sans-serif; margin:0; color:#3f3f3f;}
+table{border-collapse:collapse; border-spacing:0; width: 100%; border:0;}
+a{text-decoration:none; outline:none; color:#3f3f3f; -webkit-transition:all 400ms ease-out; -mozilla-transition:all 400ms ease-out; -ms-transition:all 400ms ease-out; -o-transition:all 400ms ease-out; transition:all 400ms ease-out;cursor: pointer;}
+img,body{-webkit-transition:all 400ms ease-out; -mozilla-transition:all 400ms ease-out; -ms-transition:all 400ms ease-out; -o-transition:all 400ms ease-out; transition:all 400ms ease-out;}
+a:hover{text-decoration:none; -webkit-transition:all 400ms ease-out; -mozilla-transition:all 400ms ease-out; -ms-transition:all 400ms ease-out; -o-transition:all 400ms ease-out; transition:all 400ms ease-out;}
+.cl{height:0; font-size:1px; clear:both; line-height:0;}
+.none{display:none}
+*:focus{outline:none}
+i,em,ins,u{font-style:normal; text-decoration:none}
+nav,footer,section,header,article{display:block;}
+.wrap{width:1200px; margin:0 auto;min-width: 1200px;}
+.fl{float:left}
+.fr{float:right}
+.pr{position:relative}
+.pa{position:absolute}
+.oh{ overflow:hidden;}
+.clearfix{*zoom:1;}
+.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
+.clearfix:after{clear:both;}
+.bgfff{ background:#fff}
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button{-webkit-appearance:none;}
+
+::-webkit-scrollbar{width:10px;height:10px; }
+::-webkit-scrollbar-track{background:#f1f1f1; }
+::-webkit-scrollbar-track:hover{background:#eee; }
+::-webkit-scrollbar-thumb{border-radius:10px;background:#b9b9b9; }
+::-webkit-scrollbar-thumb:hover{background:#747474; }
+::-webkit-scrollbar-thumb:active{background:#555; }
+
+input[type="text"],
+input[type="password"],
+textarea,select{ border:#e1e1e1 solid 1px; font-size:14px; margin: 0; padding: 0;webkit-transition:all 300ms ease-out; -mozilla-transition:all 300ms ease-out; -ms-transition:all 300ms ease-out; -o-transition:all 300ms ease-out; transition:all 300ms ease-out;}
+input:focus,textarea:focus,select:focus{outline:none; border:1px solid #1abd9b; box-shadow: 0 0 4px rgba(103, 166, 217, 0.6);}
+
+.bgwrap{position: fixed;width: 100%;height: 100%;min-width: 1200px;}
+.bg{position: fixed;left: 0;top: 0;right: 0;bottom: 0;}
+.bg>img{display: block;width: 100%;height: 100%;}
+.phoneBox{position: absolute;top: 90px;left: 3px;width: 320px;height: 504px;overflow: hidden;}
+.page{position: relative;display: none;}
+.current{display: block;position: fixed;height:100%;width:100%;overflow: hidden;}
+.item{position: absolute;}
+.amious{width:100%;height: 100%}
+.panel{width: 34px;height: 486px;position: absolute;right: -34px;top: 0;}
+.pageprev,.pagenext{width: 34px;height: 75px;padding-top: 11px;background: #1abd9b;font-size: 14px;color: #fff;text-align: center;border-top-right-radius: 5px;border-bottom-right-radius: 5px;margin-bottom: 30px;}
+.pageprev{margin-top: 200px;}
+.el-bgimg{width:100%;height:100%;}
+.scenename{position: absolute;top: 55px;left: 3px;color:#fff;width:320px;height:30px;line-height:30px;overflow: hidden;text-align: center;}
+.share{float: left;margin-top: 150px;margin-left: 300px}
+.share p{width: 250px;text-align: center;font-size: 16px;color: #696969;margin: 20px 0;}
+.share img{width: 250px;height: 250px;}
+.shareways{margin: 20px 0;}
+.shareways ul{overflow: hidden;}
+.shareways li{float: left;width: 50px;height: 50px;}
+.shareways li a{display: block;width: 42px;height: 42px;margin: 4px auto;border-radius: 50%;box-shadow: 0 0 20px -10px #000;}
+.share>a{display: block;width: 150px;height: 40px;line-height: 40px;background: #1abd9b;color: #fff;border-radius: 5px;text-align: center;margin: 0 auto;}
+.num{    font-size: 30px;
+  vertical-align: 20px;}
+.dateText{font-size: 17.5px;
+  vertical-align: 25px;
+  margin: 5px;}
+.audio_btn {
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 10px;
+  top: 10px;
+  z-index: 99999;
+}
+.audio_btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.audio_btn.play {
+  animation: play 1.5s linear both infinite;
+  -webkit-animation: play 1.5s linear both infinite;
+}
+@-webkit-keyframes play{
+  0%{transform: rotate(0deg);-webkit-transform: rotate(0deg);}
+  100%{transform: rotate(360deg);-webkit-transform: rotate(360deg);}
+}
+
+
+
+
+@font-face {
+  font-family: xiaoluti;
+  src: url("https://res.zhangu365.com/sys/fonts/5XVTJfDb.ttf");
+}
+@font-face {
+  font-family: yuanhei;
+  src: url("https://res.zhangu365.com/sys/fonts/17jUBw5i.ttf");
+}
+@font-face {
+  font-family: kaiti;
+  src: url("https://res.zhangu365.com/sys/fonts/mCN638YF.ttf");
+}
+@font-face {
+  font-family: fangsong;
+  src: url("https://res.zhangu365.com/sys/fonts/eaNhq6iV.ttf");
+}
+@font-face {
+  font-family: shouxiehaibaoti;
+  src: url("https://res.zhangu365.com/sys/fonts/fnqHYu8i.ttf");
+}
+
+@font-face {
+  font-family: pangyaer;
+  src: url("https://res.zhangu365.com/sys/fonts/WdH3j82h.ttf");
+}
+@font-face {
+  font-family: qiaoqiaoti;
+  src: url("https://res.zhangu365.com/sys/fonts/fEgCpJZv.ttf");
+}
+@font-face {
+  font-family: xiyuanti;
+  src: url("https://res.zhangu365.com/sys/fonts/B4ydZmkC.ttf");
+}
+@font-face {
+  font-family: jialiliti;
+  src: url("https://res.zhangu365.com/sys/fonts/gT14VcPb.ttf");
+}
+@font-face {
+  font-family: taotaoti;
+  src: url("https://res.zhangu365.com/sys/fonts/3APGuTX5.ttf");
+}
+
+@font-face {
+  font-family: nanati;
+  src: url("https://res.zhangu365.com/sys/fonts/bvs8XSmY.ttf");
+}
+@font-face {
+  font-family: nuoyeti;
+  src: url("https://res.zhangu365.com/sys/fonts/UadfkSxE.ttf");
+}
+@font-face {
+  font-family: xiaoyuti;
+  src: url("https://res.zhangu365.com/sys/fonts/k2ieDFgT.ttf");
+}
+@font-face {
+  font-family: qipaoti;
+  src: url("https://res.zhangu365.com/sys/fonts/1qv5gJcw.ttf");
+}
+@font-face {
+  font-family: yingxiang;
+  src: url("https://res.zhangu365.com/sys/fonts/vZPdHUVb.ttf");
+}
+
+@font-face {
+  font-family: tianzhengti;
+  src: url("https://res.zhangu365.com/sys/fonts/MNeqZiRI.ttf");
+}
+@font-face {
+  font-family: runhangti;
+  src: url("https://res.zhangu365.com/sys/fonts/SmPJWMu3.ttf");
+}
+@font-face {
+  font-family: qingcong;
+  src: url("https://res.zhangu365.com/sys/fonts/wrbIFB7m.ttf");
+}
+@font-face {
+  font-family: xihe;
+  src: url("https://res.zhangu365.com/sys/fonts/WC48az0G.ttf");
+}
+@font-face {
+  font-family: wukelili;
+  src: url("https://res.zhangu365.com/sys/fonts/4Q21Zxkc.ttf");
+}
+
+@font-face {
+  font-family: fangmeng;
+  src: url("https://res.zhangu365.com/sys/fonts/7CISxaBq.ttf");
+}
+@font-face {
+  font-family: growing;
+  src: url("https://res.zhangu365.com/sys/fonts/CGwVca8Z.ttf");
+}
+@font-face {
+  font-family: marshmallow;
+  src: url("https://res.zhangu365.com/sys/fonts/VjT34FUI.ttf");
+}
+@font-face {
+  font-family: jianxin;
+  src: url("https://res.zhangu365.com/sys/fonts/6cD4jaqA.ttf");
+}
+@font-face {
+  font-family: wanwan;
+  src: url("https://res.zhangu365.com/sys/fonts/9y43DjWM.ttf");
+}
+
+@font-face {
+  font-family: zhijiaodai;
+  src: url("https://res.zhangu365.com/sys/fonts/p48SYXMa.ttf");
+}
+@font-face {
+  font-family: huaban;
+  src: url("https://res.zhangu365.com/sys/fonts/YkS40DZ2.ttf");
+}
+@font-face {
+  font-family: degula;
+  src: url("https://res.zhangu365.com/sys/fonts/FWE1PmRv.ttf");
+}
+@font-face {
+  font-family: guiqi;
+  src: url("https://res.zhangu365.com/sys/fonts/UDpqkQVN.ttf");
+}
+@font-face {
+  font-family: liulianbabab;
+  src: url("https://res.zhangu365.com/sys/fonts/SjAy36xv.ttf");
+}
+
+@font-face {
+  font-family: guangrongzhanfang;
+  src: url("https://res.zhangu365.com/sys/fonts/5H8uwfVW.ttf");
+}
+@font-face {
+  font-family: huanyebojue;
+  src: url("https://res.zhangu365.com/sys/fonts/1sQRGkj9.ttf");
+}
+@font-face {
+  font-family: tiantianquan;
+  src: url("https://res.zhangu365.com/sys/fonts/UVQ2F5tB.ttf");
+}
+@font-face {
+  font-family: bansong;
+  src: url("https://res.zhangu365.com/sys/fonts/HQ1u5Bjx.ttf");
+}
+@font-face {
+  font-family: mitaoxiaogongju;
+  src: url("https://res.zhangu365.com/sys/fonts/yDk0iw76.ttf");
+}
+@font-face {
+  font-family: mangguodidi;
+  src: url("https://res.zhangu365.com/sys/fonts/PB7eVXW6.ttf");
+}
+
+
+
+@font-face {
+  font-family: HWFangSong;
+  src: url("https://res.zhangu365.com/fodder/font/HWFangSong.ttf");
+}
+@font-face {
+  font-family: HWXingKai;
+  src: url("https://res.zhangu365.com/fodder/font/HWXingKai.ttf");
+}
+@font-face {
+  font-family: HYXiYuan;
+  src: url("https://res.zhangu365.com/fodder/font/HYXiYuan.ttf");
+}
+@font-face {
+  font-family: WRYaHei;
+  src: url("https://res.zhangu365.com/fodder/font/WRYaHei.ttf");
+}
+@font-face {
+  font-family: SYHeiTi;
+  src: url("https://res.zhangu365.com/fodder/font/SYHeiTi.otf");
+}
+@font-face {
+  font-family: SYSongTi;
+  src: url("https://res.zhangu365.com/fodder/font/SYSongTi.otf");
+}
+@font-face {
+  font-family: HYDianYaTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYDianYaTiJ.ttf");
+}
+@font-face {
+  font-family: HYLiangPinXianCuJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYLiangPinXianCuJ.ttf");
+}
+@font-face {
+  font-family: HYXiXiuTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYXiXiuTiJ.ttf");
+}
+@font-face {
+  font-family: yegenyou_jingyun;
+  src: url("https://res.zhangu365.com/fodder/font/yegenyou_jingyun.ttf");
+}
+@font-face {
+  font-family: HYBaoSongF;
+  src: url("https://res.zhangu365.com/fodder/font/HYBaoSongF.ttf");
+}
+@font-face {
+  font-family: ZZGFYHQXT;
+  src: url("https://res.zhangu365.com/fodder/font/ZZGFYHQXT.otf");
+}
+@font-face {
+  font-family: RXXXT;
+  src: url("https://res.zhangu365.com/fodder/font/RXXXT.otf");
+}
+@font-face {
+  font-family: HYQingTing-55J;
+  src: url("https://res.zhangu365.com/fodder/font/HYQingTing-55J.ttf");
+}
+@font-face {
+  font-family: HYLiHeiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYLiHeiJ.ttf");
+}
+@font-face {
+  font-family: HYYaKuHeiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYYaKuHeiJ.ttf");
+}
+@font-face {
+  font-family: HYZhuZiMeiXinTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYZhuZiMeiXinTiJ.ttf");
+}
+@font-face {
+  font-family: HYZongYiTiF;
+  src: url("https://res.zhangu365.com/fodder/font/HYZongYiTiJ.ttf");
+}
+@font-face {
+  font-family: egenyou_maobixingshu_1;
+  src: url("https://res.zhangu365.com/fodder/font/egenyou_maobixingshu_1.ttf");
+}
+@font-face {
+  font-family: HYGuoQiangXingShuJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYGuoQiangXingShuJ.ttf");
+}
+@font-face {
+  font-family: HYZhangNaiRenXingShuJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYZhangNaiRenXingShuJ.ttf");
+}
+@font-face {
+  font-family: yegenyou_jifengcaoshu;
+  src: url("https://res.zhangu365.com/fodder/font/yegenyou_jifengcaoshu.ttf");
+}
+@font-face {
+  font-family: LIXUKSF;
+  src: url("https://res.zhangu365.com/fodder/font/LIXUKSF.ttf");
+}
+@font-face {
+  font-family: HANYISWSF;
+  src: url("https://res.zhangu365.com/fodder/font/HANYISWSF.ttf");
+}
+@font-face {
+  font-family: TSYTDZK;
+  src: url("https://res.zhangu365.com/fodder/font/TSYTDZK.ttf");
+}
+@font-face {
+  font-family: DUANNMB;
+  src: url("https://res.zhangu365.com/fodder/font/DUANNMB.ttf");
+}
+@font-face {
+  font-family: HYBaiQiTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYBaiQiTiJ.ttf");
+}
+@font-face {
+  font-family: HYCaiDieTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYCaiDieTiJ.ttf");
+}
+@font-face {
+  font-family: HYChangYiTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYChangYiTiJ.ttf");
+}
+@font-face {
+  font-family: HYShenGongTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYShenGongTiJ.ttf");
+}
+@font-face {
+  font-family: HYShuangXianTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYShuangXianTiJ.ttf");
+}
+@font-face {
+  font-family: HYTangTangCuTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYTangTangCuTiJ.ttf");
+}
+@font-face {
+  font-family: HYYaYaTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYYaYaTiJ.ttf");
+}
+@font-face {
+  font-family: HYXiaoMaiTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYXiaoMaiTiJ.ttf");
+}
+@font-face {
+  font-family: ZHANKKLT;
+  src: url("https://res.zhangu365.com/fodder/font/ZHANKKLT.ttf");
+}
+@font-face {
+  font-family: HXPNRBJT;
+  src: url("https://res.zhangu365.com/fodder/font/HXPNRBJT.ttf");
+}
+@font-face {
+  font-family: ZZGFLH;
+  src: url("https://res.zhangu365.com/fodder/font/ZZGFLH.otf");
+}
+@font-face {
+  font-family: ZZGFBHT;
+  src: url("https://res.zhangu365.com/fodder/font/ZZGFBHT.ttf");
+}
+@font-face {
+  font-family: ZZGFSY;
+  src: url("https://res.zhangu365.com/fodder/font/ZZGFSY.otf");
+}
+@font-face {
+  font-family: ZZGFYH;
+  src: url("https://res.zhangu365.com/fodder/font/ZZGFYH.otf");
+}
+@font-face {
+  font-family: XDhbb;
+  src: url("https://res.zhangu365.com/fodder/font/XDhbb.ttf");
+}
+@font-face {
+  font-family: XDhbbd;
+  src: url("https://res.zhangu365.com/fodder/font/XDhbbd.ttf");
+}
+@font-face {
+  font-family: STFGXYgbk;
+  src: url("https://res.zhangu365.com/fodder/font/STFGXYgbk.ttf");
+}
+@font-face {
+  font-family: ZKgdh;
+  src: url("https://res.zhangu365.com/fodder/font/ZKgdh.ttf");
+}
+@font-face {
+  font-family: MINIjcq;
+  src: url("https://res.zhangu365.com/fodder/font/MINIjcq.ttf");
+}
+@font-face {
+  font-family: ZZGFls;
+  src: url("https://res.zhangu365.com/fodder/font/ZZGFls.ttf");
+}
+@font-face {
+  font-family: HYHaHaTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYHaHaTiJ.ttf");
+}
+@font-face {
+  font-family: HYHeiLiZhiTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYHeiLiZhiTiJ.ttf");
+}
+@font-face {
+  font-family: HYXiaoBoZheZhiTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYXiaoBoZheZhiTiJ.ttf");
+}
+@font-face {
+  font-family: HYXiaRiTiJ;
+  src: url("https://res.zhangu365.com/fodder/font/HYXiaRiTiJ.ttf");
+}
+@font-face {
+  font-family: arial;
+  src: url("https://res.zhangu365.com/fodder/font/arial.ttf");
+}
+@font-face {
+  font-family: ColonnaMT;
+  src: url("https://res.zhangu365.com/fodder/font/ColonnaMT.ttf");
+}
+@font-face {
+  font-family: DryBrush;
+  src: url("https://res.zhangu365.com/fodder/font/DryBrush.ttf");
+}
+@font-face {
+  font-family: HEMIHEAD;
+  src: url("https://res.zhangu365.com/fodder/font/HEMIHEAD.TTF");
+}
+@font-face {
+  font-family: MANIFESTO;
+  src: url("https://res.zhangu365.com/fodder/font/MANIFESTO.ttf");
+}
+@font-face {
+  font-family: ruach;
+  src: url("https://res.zhangu365.com/fodder/font/ruach.TTF");
+}
+@font-face {
+  font-family: DINCond-LightAlternate;
+  src: url("https://res.zhangu365.com/fodder/font/DINCond-LightAlternate.otf");
+}
+@font-face {
+  font-family: CODELight;
+  src: url("https://res.zhangu365.com/fodder/font/CODELight.otf");
+}
+@font-face {
+  font-family: Dense-Regular;
+  src: url("https://res.zhangu365.com/fodder/font/Dense-Regular.otf");
+}
+@font-face {
+  font-family: Angsana New;
+  src: url("https://res.zhangu365.com/fodder/font/AngsanaNew.ttf");
+}
+@font-face {
+  font-family: MekanikLET;
+  src: url("https://res.zhangu365.com/fodder/font/MekanikLET.TTF");
+}
+
+
+
+@font-face {
+  font-family: AngsanaNew;
+  src: url("https://res.zhangu365.com/fodder/font/2018/AngsanaNew.ttf");
+}
+
+@font-face {
+  font-family: ArialMT;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ArialMT.ttf");
+}
+
+@font-face {
+  font-family: CodeLight;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Code-Light.otf");
+}
+
+@font-face {
+  font-family: ColonnaMT;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ColonnaMT.ttf");
+}
+
+@font-face {
+  font-family: DenseRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Dense-Regular.otf");
+}
+
+@font-face {
+  font-family: DINCondLightAlternate;
+  src: url("https://res.zhangu365.com/fodder/font/2018/DINCond-LightAlternate.otf");
+}
+
+@font-face {
+  font-family: DryBrush;
+  src: url("https://res.zhangu365.com/fodder/font/2018/DryBrush.ttf");
+}
+
+@font-face {
+  font-family: GJJCQJWGB;
+  src: url("https://res.zhangu365.com/fodder/font/2018/GJJCQJW--GB1-0.ttf");
+}
+
+@font-face {
+  font-family: HappyZcool;
+  src: url("https://res.zhangu365.com/fodder/font/2018/HappyZcool-2016.ttf");
+}
+
+@font-face {
+  font-family: HemiHead;
+  src: url("https://res.zhangu365.com/fodder/font/2018/HemiHead426.TTF");
+}
+
+@font-face {
+  font-family: KaiTi;
+  src: url("https://res.zhangu365.com/fodder/font/2018/KaiTi.ttf");
+}
+
+@font-face {
+  font-family: LiSu;
+  src: url("https://res.zhangu365.com/fodder/font/2018/LiSu.TTF");
+}
+
+@font-face {
+  font-family: MANIFESTO;
+  src: url("https://res.zhangu365.com/fodder/font/2018/MANIFESTO.ttf");
+}
+
+@font-face {
+  font-family: MekanikLetPlain;
+  src: url("https://res.zhangu365.com/fodder/font/2018/MekanikLetPlain.TTF");
+}
+
+@font-face {
+  font-family: PangMenZhengDao;
+  src: url("https://res.zhangu365.com/fodder/font/2018/PangMenZhengDao.ttf");
+}
+
+@font-face {
+  font-family: Regular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Regular.ttf");
+}
+
+@font-face {
+  font-family: RuachLetPlain;
+  src: url("https://res.zhangu365.com/fodder/font/2018/RuachLetPlain.TTF");
+}
+
+@font-face {
+  font-family: SimHei;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SimHei.ttf");
+}
+
+@font-face {
+  font-family: SourceHanSansSCBold;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SourceHanSansSC-Bold.otf");
+}
+
+@font-face {
+  font-family: SourceHanSansSCLight;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SourceHanSansSC-Light.otf");
+}
+
+@font-face {
+  font-family: SourceHanSansSCNormal;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SourceHanSansSC-Normal.otf");
+}
+
+@font-face {
+  font-family: SourceHanSerifSCHeavy;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SourceHanSerifSC-Heavy.otf");
+}
+
+@font-face {
+  font-family: SourceHanSerifSCLight;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SourceHanSerifSC-Light.otf");
+}
+
+@font-face {
+  font-family: SourceHanSerifSCMedium;
+  src: url("https://res.zhangu365.com/fodder/font/2018/SourceHanSerifSC-Medium.otf");
+}
+
+@font-face {
+  font-family: WenQuanYiZenHei;
+  src: url("https://res.zhangu365.com/fodder/font/2018/WenQuanYiZenHei.ttf");
+}
+
+@font-face {
+  font-family: xiaowei;
+  src: url("https://res.zhangu365.com/fodder/font/2018/xiaowei.otf");
+}
+
+@font-face {
+  font-family: YouYuan;
+  src: url("https://res.zhangu365.com/fodder/font/2018/YouYuan.TTF");
+}
+
+@font-face {
+  font-family: zcoolgdh;
+  src: url("https://res.zhangu365.com/fodder/font/2018/zcool-gdh.ttf");
+}
+
+@font-face {
+  font-family: CloudtypeHJSweibeiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Cloudtype-HJSweibeiGB-Regular.ttf");
+}
+
+@font-face {
+  font-family: CloudtypeHZxingshuGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Cloudtype-HZxingshuGB-Regular.ttf");
+}
+
+@font-face {
+  font-family: CloudtypeJGjingxinkaiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Cloudtype-JGjingxinkaiGB-Regular.ttf");
+}
+
+@font-face {
+  font-family: CloudtypeJGxinzhichanyuGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Cloudtype-JGxinzhichanyuGB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReeJiBigRuiqiaoRegularGBVRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ReeJi-BigRuiqiao-RegularGBV1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReeJiBigRuixainBoldGBVRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ReeJi-BigRuixain-BoldGBV1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReeJiBigRuixianLightGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ReeJi-BigRuixian-LightGB4.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReeJiBigRuixianThinGBVRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ReeJi-BigRuixian-ThinGBV1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIBigYoungBoldGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-BigYoung-BoldGB2.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIBigYoungMediumGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-BigYoung-MediumGB2.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIBrightExtraBoldGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-Bright-ExtraBoldGB1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudHeiCuGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudHeiCu-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudHeiTiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudHeiTi-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudMeiHeiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudMeiHei-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudRuiHeiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudRuiHei-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudRuiQianGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudRuiQian-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudSongShuGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudSongShu-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudSongXiaoGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudSongXiao-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudYaoTiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudYaoTi-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudYuanXiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudYuanXi-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudYuanZhunGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudYuanZhun-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudZhongDengGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudZhongDeng-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: ReejiCloudZongYiGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/Reeji-CloudZongYi-GB-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIJinGangBoldGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-JinGang-BoldGB1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIPangBoGBHighRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-PangBoGB-High-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJITopBlackGBVRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-Top-BlackGBV1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIXiaodouJianmoduTRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-Xiaodou-JianmoduT-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIXiaodouMofeiyuanGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-Xiaodou-MofeiyuanGB-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIXiaodouMoxiuliGBRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJI-Xiaodou-MoxiuliGB-Regular.ttf");
+}
+
+@font-face {
+  font-family: REEJIiSunBoldGBVRegular;
+  src: url("https://res.zhangu365.com/fodder/font/2018/REEJIi-Sun-BoldGBV1.0-Regular.ttf");
+}
+
+@font-face {
+  font-family: DroidSansFallback;
+  src: url("https://res.zhangu365.com/fodder/font/2018/DroidSansFallback.ttf");
+}
+@font-face {
+  font-family: ShouShuti;
+  src: url("https://res.zhangu365.com/fodder/font/2018/ShouShuti.ttf");
+}
+@font-face {
+  font-family: WenQuanYiMicroHei;
+  src: url("https://res.zhangu365.com/fodder/font/2018/WenQuanYiMicroHei.ttf");
+}
+@font-face {
+  font-family: HuXiaoBoKuHei;
+  src: url("https://res.zhangu365.com/fodder/font/2018/HuXiaoBoKuHei.ttf");
+}
+@font-face {
+  font-family: zcoolwenyiti;
+  src: url("https://res.zhangu365.com/fodder/font/2018/zcoolwenyiti.ttf");
+}
+@font-face {
+  font-family: LucidaCalligraphy-Italic;
+  src: url("https://res.zhangu365.com/fodder/font/2018/LucidaCalligraphy-Italic.ttf");
+}

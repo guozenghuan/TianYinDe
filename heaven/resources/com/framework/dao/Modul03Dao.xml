@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.Modul03Dao">
+
+	<select id="queryObject" resultType="com.framework.entity.Modul03Entity">
+		select * from modul_03 where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.Modul03Entity">
+		select * from modul_03
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="modulPath != null">
+			and modul_path = #{modulPath}
+		</if>
+		<if test="modulType != null">
+			and modul_type = #{modulType}
+		</if>
+		<if test="image01 != null">
+			and image_01 = #{image01}
+		</if>
+		<if test="image02 != null">
+			and image_02 = #{image02}
+		</if>
+		<if test="image03 != null">
+			and image_03 = #{image03}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.Modul03Entity">
+		select * from modul_03 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from modul_03 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.Modul03Entity" useGeneratedKeys="true" keyProperty="id">
+		insert into modul_03
+		(
+			`modul_path`, 
+			`modul_type`, 
+			`image_01`, 
+			`image_02`, 
+			`image_03`
+		)
+		values
+		(
+			#{modulPath}, 
+			#{modulType}, 
+			#{image01}, 
+			#{image02}, 
+			#{image03}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.Modul03Entity">
+		update modul_03 
+		<set>
+			<if test="modulPath != null">`modul_path` = #{modulPath}, </if>
+			<if test="modulType != null">`modul_type` = #{modulType}, </if>
+			<if test="image01 != null">`image_01` = #{image01}, </if>
+			<if test="image02 != null">`image_02` = #{image02}, </if>
+			<if test="image03 != null">`image_03` = #{image03}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from modul_03 where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from modul_03 where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

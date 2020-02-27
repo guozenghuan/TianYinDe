@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.dao.ModulMusicDao">
+
+	<select id="queryObject" resultType="com.framework.entity.ModulMusicEntity">
+		select * from modul_music where id = #{value}
+	</select>
+	
+	<select id="queryObjectByKey" resultType="com.framework.entity.ModulMusicEntity">
+		select * from modul_music
+		where id != -1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="name != null">
+			and name = #{name}
+		</if>
+		<if test="path != null">
+			and path = #{path}
+		</if>
+		<if test="createtime != null">
+			and createtime = #{createtime}
+		</if>
+	</select>
+
+	<select id="queryList" resultType="com.framework.entity.ModulMusicEntity">
+		select * from modul_music 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from modul_music 
+	</select>
+	 
+	<insert id="save" parameterType="com.framework.entity.ModulMusicEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into modul_music
+		(
+			`type`, 
+			`user_id`, 
+			`name`, 
+			`path`, 
+			`createtime`
+		)
+		values
+		(
+			#{type}, 
+			#{userId}, 
+			#{name}, 
+			#{path}, 
+			#{createtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.framework.entity.ModulMusicEntity">
+		update modul_music 
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="path != null">`path` = #{path}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from modul_music where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from modul_music where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

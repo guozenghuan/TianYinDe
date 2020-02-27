@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>平台信息统计</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div class="panel panel-default" id="rrapp" v-cloak>
+	<div class="panel-heading">{{title}}</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日新增用户</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayUser" placeholder="今日新增用户"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">平台总用户</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allUser" placeholder="平台总用户"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日商品下单</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayCommodity" placeholder="今日商品下单"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">累计商品单量</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allCommodity" placeholder="累计商品单量"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日服务下单</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayService" placeholder="今日服务下单"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">累计服务下单</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allService" placeholder="累计服务下单"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日预约服务费</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayServiceMoney" placeholder="今日预约服务费"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">累计预约服务费</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allServiceMoney" placeholder="累计预约服务费"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日服务套餐费</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayServicePrice" placeholder="今日服务套餐费"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">累计服务套餐费</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allServicePrice" placeholder="累计服务套餐费"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日赠送平台礼物</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayGift" placeholder="今日赠送平台礼物"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">累计赠送平台礼物</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allGift" placeholder="累计赠送平台礼物"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">今日收到奠金</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.todayCash" placeholder="今日收到奠金"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">累计收到奠金</div>
+		   	<div class="col-sm-10">
+		      <input type="text" class="form-control" v-model="tyStatistics.allCash" placeholder="累计收到奠金"/>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label"></div> 
+			<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+			&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="back" value="返回"/>
+		</div>
+	</form>
+</div>
+
+<script src="${rc.contextPath}/js/tystatistics/tystatistics_add.js?_${date.systemTime}"></script>
+</body>
+</html>
